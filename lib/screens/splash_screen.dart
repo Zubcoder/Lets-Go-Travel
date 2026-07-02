@@ -61,37 +61,64 @@ class _SplashScreenState extends State<SplashScreen>
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.background,
-      body: Center(
-        child: FadeTransition(
-          opacity: _fadeAnimation,
-          child: ScaleTransition(
-            scale: _scaleAnimation,
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                const AppLogo(size: 120),
-                const SizedBox(height: 24),
-                const Text(
-                  AppConstants.appName,
-                  style: TextStyle(
-                    fontSize: 32,
-                    fontWeight: FontWeight.bold,
-                    color: AppColors.textPrimary,
-                  ),
-                ),
-                const SizedBox(height: 8),
-                Text(
-                  AppConstants.appTagline,
-                  style: TextStyle(
-                    fontSize: 14,
-                    color: AppColors.textSecondary,
-                    fontStyle: FontStyle.italic,
-                  ),
-                ),
-              ],
+      body: Stack(
+        fit: StackFit.expand,
+        children: [
+          // Watercolor background
+          Opacity(
+            opacity: 0.4,
+            child: Image.asset(
+              'assets/images/watercolor_bg.jpg',
+              fit: BoxFit.cover,
             ),
           ),
-        ),
+          // Dark gradient overlay for readability
+          Container(
+            decoration: BoxDecoration(
+              gradient: RadialGradient(
+                center: Alignment.center,
+                radius: 1.2,
+                colors: [
+                  AppColors.background.withValues(alpha: 0.3),
+                  AppColors.background.withValues(alpha: 0.85),
+                ],
+              ),
+            ),
+          ),
+          // Content
+          Center(
+            child: FadeTransition(
+              opacity: _fadeAnimation,
+              child: ScaleTransition(
+                scale: _scaleAnimation,
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    const AppLogo(size: 120),
+                    const SizedBox(height: 24),
+                    const Text(
+                      AppConstants.appName,
+                      style: TextStyle(
+                        fontSize: 32,
+                        fontWeight: FontWeight.bold,
+                        color: AppColors.textPrimary,
+                      ),
+                    ),
+                    const SizedBox(height: 8),
+                    Text(
+                      AppConstants.appTagline,
+                      style: TextStyle(
+                        fontSize: 14,
+                        color: AppColors.textSecondary,
+                        fontStyle: FontStyle.italic,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
