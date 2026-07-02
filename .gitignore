@@ -1,0 +1,41 @@
+# Flutter
+*.dart_tool/
+.packages
+.pub/
+build/
+.flutter-plugins
+.flutter-plugins-dependencies
+
+# IDE
+.idea/
+*.iml
+.vscode/
+
+# Android
+android/.gradle/
+android/app/debug/
+android/app/profile/
+android/app/release/
+android/key.properties
+*.jks
+
+# iOS
+ios/Pods/
+ios/.symlinks/
+ios/Flutter/Flutter.framework
+ios/Flutter/Flutter.podspec
+
+# macOS
+macos/Flutter/ephemeral/
+
+# Backend
+backend/.env
+backend/__pycache__/
+backend/app/__pycache__/
+backend/app/routers/__pycache__/
+**/__pycache__/
+*.pyc
+
+# Misc
+.DS_Store
+*.log
