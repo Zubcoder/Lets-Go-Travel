@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import '../l10n/app_localizations.dart';
 import '../services/analytics_service.dart';
+import 'ai_planner_screen.dart';
 import 'flights_screen.dart';
 import 'hotels_screen.dart';
-import 'ai_planner_screen.dart';
 import 'settings_screen.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -17,9 +17,9 @@ class _HomeScreenState extends State<HomeScreen> {
   int _currentIndex = 0;
 
   final _screens = const [
+    AiPlannerScreen(),
     FlightsScreen(),
     HotelsScreen(),
-    AiPlannerScreen(),
     SettingsScreen(),
   ];
 
@@ -42,12 +42,17 @@ class _HomeScreenState extends State<HomeScreen> {
         child: BottomNavigationBar(
           currentIndex: _currentIndex,
           onTap: (i) {
-            const tabNames = ['flights', 'hotels', 'ai_planner', 'settings'];
+            const tabNames = ['ai_planner', 'flights', 'hotels', 'settings'];
             AnalyticsService.tabChanged(tabNames[i]);
             setState(() => _currentIndex = i);
           },
           type: BottomNavigationBarType.fixed,
           items: [
+            BottomNavigationBarItem(
+              icon: const Icon(Icons.auto_awesome_outlined),
+              activeIcon: const Icon(Icons.auto_awesome),
+              label: l10n.aiPlanner,
+            ),
             BottomNavigationBarItem(
               icon: const Icon(Icons.flight_outlined),
               activeIcon: const Icon(Icons.flight),
@@ -57,11 +62,6 @@ class _HomeScreenState extends State<HomeScreen> {
               icon: const Icon(Icons.hotel_outlined),
               activeIcon: const Icon(Icons.hotel),
               label: l10n.hotels,
-            ),
-            BottomNavigationBarItem(
-              icon: const Icon(Icons.auto_awesome_outlined),
-              activeIcon: const Icon(Icons.auto_awesome),
-              label: l10n.aiPlanner,
             ),
             BottomNavigationBarItem(
               icon: const Icon(Icons.settings_outlined),
