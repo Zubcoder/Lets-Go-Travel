@@ -33,4 +33,15 @@ class AppConstants {
   static const String searchDatePrefKey = 'search_date';
 
   static const String baseUrl = 'https://lets-go-travel-api.fly.dev';
+
+  // Affiliate partner URLs (Travelpayouts marker will be appended)
+  static const String aviasalesUrl = 'https://www.aviasales.ru';
+  static const String hotellookUrl = 'https://www.hotellook.ru';
+  static const String tripsterUrl = 'https://experience.tripster.ru';
+  static const String sputnik8Url = 'https://www.sputnik8.com';
+  static const String discoverCarsUrl = 'https://www.discovercars.com';
+  static const String chereahapaUrl = 'https://cherehapa.ru';
+  static const String yesimUrl = 'https://www.yesim.app';
+  static const String kiwitaxiUrl = 'https://kiwitaxi.com';
+  static const String telegramBotUrl = 'https://t.me/LetsGoTravelAIBot';
 }

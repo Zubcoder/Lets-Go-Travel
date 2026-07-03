@@ -127,26 +127,17 @@
       width: 140px;
       height: 140px;
       margin: 0 auto 32px;
-      background: linear-gradient(135deg, var(--accent-orange), #E67300);
       border-radius: 32px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 64px;
       box-shadow: 0 16px 64px var(--glow-orange);
       animation: pulse-glow 3s ease-in-out infinite;
-      position: relative;
       overflow: hidden;
     }
 
-    .hero-logo::after {
-      content: '';
-      position: absolute;
-      width: 60%;
-      height: 60%;
-      background: radial-gradient(circle, rgba(255,255,255,0.25) 0%, transparent 70%);
-      top: -10%;
-      left: -10%;
+    .hero-logo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 32px;
     }
 
     @keyframes pulse-glow {
@@ -574,7 +565,7 @@
   <div class="container">
     <!-- Hero -->
     <section class="hero">
-      <div class="hero-logo">&#9992;</div>
+      <div class="hero-logo"><img src="logo.png" alt="Let's Go Travel Logo"></div>
       <h1>Let's Go Travel</h1>
       <p class="hero-tagline">
         <strong>AI-помощник</strong> для путешествий. Находим самые дешёвые авиабилеты, лучшие отели
@@ -697,12 +688,14 @@
     <div class="partners-section">
       <h2 class="section-title">Партнёры и <span>технологии</span></h2>
       <div class="partners-grid">
-        <div class="partner-item">Travelpayouts</div>
         <div class="partner-item">Aviasales</div>
         <div class="partner-item">Hotellook</div>
-        <div class="partner-item">Flutter</div>
-        <div class="partner-item">FastAPI</div>
-        <div class="partner-item">AI / ML</div>
+        <div class="partner-item">Tripster</div>
+        <div class="partner-item">DiscoverCars</div>
+        <div class="partner-item">Cherehapa</div>
+        <div class="partner-item">Kiwitaxi</div>
+        <div class="partner-item">Yesim</div>
+        <div class="partner-item">Sputnik8</div>
       </div>
     </div>
 
@@ -714,6 +707,9 @@
         <a href="https://apps.rustore.ru/app/com.zubcoder.lets_go_travel" class="download-btn primary" target="_blank" rel="noopener">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
           Скачать в RuStore
+        </a>
+        <a href="https://t.me/LetsGoTravelAIBot" class="download-btn secondary" target="_blank" rel="noopener">
+          🤖 Telegram бот
         </a>
         <a href="https://zubcoder.github.io" class="download-btn secondary" target="_blank" rel="noopener">
           Все наши приложения &#8594;

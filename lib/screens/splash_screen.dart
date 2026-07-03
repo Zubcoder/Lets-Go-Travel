@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import '../utils/constants.dart';
-import '../widgets/app_logo.dart';
 import 'home_screen.dart';
 import 'onboarding_screen.dart';
 
@@ -94,7 +93,14 @@ class _SplashScreenState extends State<SplashScreen>
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    const AppLogo(size: 120),
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(28),
+                      child: Image.asset(
+                        'assets/images/app_logo.png',
+                        width: 140,
+                        height: 140,
+                      ),
+                    ),
                     const SizedBox(height: 24),
                     const Text(
                       AppConstants.appName,
