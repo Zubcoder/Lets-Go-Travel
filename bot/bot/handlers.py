@@ -50,7 +50,7 @@ def _main_keyboard() -> types.InlineKeyboardMarkup:
 @router.message(CommandStart())
 async def cmd_start(message: types.Message) -> None:
     text = (
-        "🌟 <b>ЛетиУмно</b> — ваш персональный travel-консьерж\n\n"
+        "🌟 <b>ЛетиУмно</b> — ваш умный помощник в путешествиях\n\n"
         "Представьте: через пару минут у вас будет готовый план "
         "идеального путешествия — с перелётом, отелем, экскурсиями "
         "и точным бюджетом. Всё это бесплатно.\n\n"
@@ -273,7 +273,7 @@ async def cmd_popular(event: types.Message | types.CallbackQuery) -> None:
 @router.callback_query(F.data == "action:plan")
 async def cmd_plan(event: types.Message | types.CallbackQuery, state: FSMContext) -> None:
     text = (
-        "🌟 <b>ЛетиУмно AI</b> — ваш персональный travel-консьерж\n\n"
+        "🌟 <b>ЛетиУмно AI</b> — ваш умный помощник в путешествиях\n\n"
         "Расскажите о путешествии мечты, и я создам "
         "идеальный план с ценами и бронированием.\n\n"
         "💬 <b>Например:</b>\n"
