@@ -24,7 +24,7 @@ class AppLocalizationsRu extends AppLocalizations {
   String get hotels => 'Отели';
 
   @override
-  String get aiPlanner => 'AI Планировщик';
+  String get aiPlanner => 'Travel AI';
 
   @override
   String get settings => 'Настройки';
@@ -84,7 +84,7 @@ class AppLocalizationsRu extends AppLocalizations {
   String get bestDeals => 'Лучшие предложения';
 
   @override
-  String get aiPlannerTitle => 'AI Планировщик маршрута';
+  String get aiPlannerTitle => 'Let\'s Go Travel AI';
 
   @override
   String get aiPlannerHint => 'Опишите ваше идеальное путешествие...';
@@ -153,7 +153,7 @@ class AppLocalizationsRu extends AppLocalizations {
       'Сравниваем цены на отели, хостелы и апартаменты по всему миру';
 
   @override
-  String get onboardingTitle3 => 'AI Планировщик';
+  String get onboardingTitle3 => 'Let\'s Go Travel AI';
 
   @override
   String get onboardingDesc3 =>

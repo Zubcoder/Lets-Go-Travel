@@ -24,7 +24,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get hotels => 'Hotels';
 
   @override
-  String get aiPlanner => 'AI Planner';
+  String get aiPlanner => 'Travel AI';
 
   @override
   String get settings => 'Settings';
@@ -84,7 +84,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get bestDeals => 'Best Deals';
 
   @override
-  String get aiPlannerTitle => 'AI Trip Planner';
+  String get aiPlannerTitle => 'Let\'s Go Travel AI';
 
   @override
   String get aiPlannerHint => 'Describe your ideal trip...';
@@ -153,7 +153,7 @@ class AppLocalizationsEn extends AppLocalizations {
       'Compare prices for hotels, hostels and apartments worldwide';
 
   @override
-  String get onboardingTitle3 => 'AI Planner';
+  String get onboardingTitle3 => 'Let\'s Go Travel AI';
 
   @override
   String get onboardingDesc3 =>

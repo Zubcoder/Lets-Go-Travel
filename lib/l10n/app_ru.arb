@@ -6,7 +6,7 @@
   "search": "Поиск",
   "flights": "Авиабилеты",
   "hotels": "Отели",
-  "aiPlanner": "AI Планировщик",
+  "aiPlanner": "Travel AI",
   "settings": "Настройки",
 
   "searchFlights": "Поиск авиабилетов",
@@ -29,7 +29,7 @@
   "searchHotelsButton": "Найти отели",
   "bestDeals": "Лучшие предложения",
 
-  "aiPlannerTitle": "AI Планировщик маршрута",
+  "aiPlannerTitle": "Let's Go Travel AI",
   "aiPlannerHint": "Опишите ваше идеальное путешествие...",
   "aiPlannerExample": "Например: Хочу на море в августе, бюджет 50 000₽ на двоих, из Москвы",
   "planTrip": "Спланировать",
@@ -53,7 +53,7 @@
   "onboardingDesc1": "Находим лучшие цены на авиабилеты по всем авиакомпаниям в один клик",
   "onboardingTitle2": "Лучшие отели",
   "onboardingDesc2": "Сравниваем цены на отели, хостелы и апартаменты по всему миру",
-  "onboardingTitle3": "AI Планировщик",
+  "onboardingTitle3": "Let's Go Travel AI",
   "onboardingDesc3": "Искусственный интеллект построит идеальный маршрут под ваш бюджет и предпочтения",
   "onboardingTitle4": "Экономьте на путешествиях!",
   "onboardingDesc4": "Уведомления о снижении цен, лайфхаки и подборки от AI-помощника",

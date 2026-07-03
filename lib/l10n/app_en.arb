@@ -6,7 +6,7 @@
   "search": "Search",
   "flights": "Flights",
   "hotels": "Hotels",
-  "aiPlanner": "AI Planner",
+  "aiPlanner": "Travel AI",
   "settings": "Settings",
 
   "searchFlights": "Search Flights",
@@ -29,7 +29,7 @@
   "searchHotelsButton": "Find Hotels",
   "bestDeals": "Best Deals",
 
-  "aiPlannerTitle": "AI Trip Planner",
+  "aiPlannerTitle": "Let's Go Travel AI",
   "aiPlannerHint": "Describe your ideal trip...",
   "aiPlannerExample": "E.g.: Beach vacation in August, budget $1000 for two, from New York",
   "planTrip": "Plan Trip",
@@ -53,7 +53,7 @@
   "onboardingDesc1": "Find the best prices across all airlines in one tap",
   "onboardingTitle2": "Best Hotels",
   "onboardingDesc2": "Compare prices for hotels, hostels and apartments worldwide",
-  "onboardingTitle3": "AI Planner",
+  "onboardingTitle3": "Let's Go Travel AI",
   "onboardingDesc3": "AI builds the perfect itinerary for your budget and preferences",
   "onboardingTitle4": "Save on Travel!",
   "onboardingDesc4": "Price drop alerts, tips and curated picks from your AI assistant",

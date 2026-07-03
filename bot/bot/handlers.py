@@ -37,7 +37,7 @@ def _main_keyboard() -> types.InlineKeyboardMarkup:
     builder = InlineKeyboardBuilder()
     builder.button(text="✈️ Поиск билетов", callback_data="action:search")
     builder.button(text="🌍 Дешёвые направления", callback_data="action:popular")
-    builder.button(text="🤖 AI Планировщик", callback_data="action:plan")
+    builder.button(text="🤖 Travel AI", callback_data="action:plan")
     builder.button(text="📱 Скачать приложение", url=config.RUSTORE_URL)
     builder.button(text="🌐 Сайт", url=config.WEBSITE_URL)
     builder.adjust(2, 2, 1)
@@ -235,7 +235,7 @@ async def cmd_popular(event: types.Message | types.CallbackQuery) -> None:
 @router.callback_query(F.data == "action:plan")
 async def cmd_plan(event: types.Message | types.CallbackQuery, state: FSMContext) -> None:
     text = (
-        "🤖 <b>AI Планировщик маршрута</b>\n\n"
+        "🤖 <b>Let's Go Travel AI</b> — Умный помощник в путешествии\n\n"
         "Опишите ваше идеальное путешествие, например:\n"
         "<i>Хочу на море в августе, бюджет 50 000₽ на двоих, из Москвы</i>\n\n"
         "Для выхода из режима планировщика — /cancel"

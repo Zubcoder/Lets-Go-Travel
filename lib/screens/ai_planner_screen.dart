@@ -83,9 +83,21 @@ class _AiPlannerScreenState extends State<AiPlannerScreen> {
                         ),
                         const SizedBox(width: 12),
                         Expanded(
-                          child: Text(
-                            l10n.aiPlannerTitle,
-                            style: theme.textTheme.titleLarge,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                l10n.aiPlannerTitle,
+                                style: theme.textTheme.titleLarge,
+                              ),
+                              const SizedBox(height: 2),
+                              Text(
+                                'Умный помощник в путешествии',
+                                style: theme.textTheme.bodySmall?.copyWith(
+                                  color: AppColors.accent,
+                                ),
+                              ),
+                            ],
                           ),
                         ),
                       ],

@@ -131,7 +131,7 @@ abstract class AppLocalizations {
   /// No description provided for @aiPlanner.
   ///
   /// In ru, this message translates to:
-  /// **'AI Планировщик'**
+  /// **'Travel AI'**
   String get aiPlanner;
 
   /// No description provided for @settings.
@@ -251,7 +251,7 @@ abstract class AppLocalizations {
   /// No description provided for @aiPlannerTitle.
   ///
   /// In ru, this message translates to:
-  /// **'AI Планировщик маршрута'**
+  /// **'Let\'s Go Travel AI'**
   String get aiPlannerTitle;
 
   /// No description provided for @aiPlannerHint.
@@ -383,7 +383,7 @@ abstract class AppLocalizations {
   /// No description provided for @onboardingTitle3.
   ///
   /// In ru, this message translates to:
-  /// **'AI Планировщик'**
+  /// **'Let\'s Go Travel AI'**
   String get onboardingTitle3;
 
   /// No description provided for @onboardingDesc3.
