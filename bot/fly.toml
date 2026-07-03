@@ -1,0 +1,11 @@
+app = "lets-go-travel-bot"
+primary_region = "ams"
+
+[build]
+
+[processes]
+  bot = "python -m bot.main"
+
+[[vm]]
+  size = "shared-cpu-1x"
+  memory = "256mb"
