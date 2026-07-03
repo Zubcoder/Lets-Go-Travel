@@ -1,0 +1,138 @@
+{
+  "@@locale": "en",
+  "appTitle": "ЛетиУмно",
+  "appTagline": "AI Travel Assistant",
+
+  "search": "Search",
+  "flights": "Flights",
+  "hotels": "Hotels",
+  "aiPlanner": "Travel AI",
+  "settings": "Settings",
+
+  "searchFlights": "Search Flights",
+  "searchHotels": "Search Hotels",
+  "from": "From",
+  "to": "To",
+  "departureDate": "Departure",
+  "returnDate": "Return",
+  "passengers": "Passengers",
+  "oneWay": "One way",
+  "roundTrip": "Round trip",
+  "searchButton": "Search",
+  "cheapestFlights": "Cheapest Flights",
+  "popularDirections": "Popular Destinations",
+
+  "checkIn": "Check-in",
+  "checkOut": "Check-out",
+  "guests": "Guests",
+  "rooms": "Rooms",
+  "searchHotelsButton": "Find Hotels",
+  "bestDeals": "Best Deals",
+
+  "aiPlannerTitle": "ЛетиУмно AI",
+  "aiPlannerHint": "Describe your ideal trip...",
+  "aiPlannerExample": "E.g.: Beach vacation in August, budget $1000 for two, from New York",
+  "planTrip": "Plan Trip",
+  "generating": "Generating itinerary...",
+
+  "language": "Language",
+  "theme": "Theme",
+  "darkTheme": "Dark",
+  "lightTheme": "Light",
+  "systemTheme": "System",
+  "support": "Support",
+  "aboutApp": "About",
+  "privacyPolicy": "Privacy Policy",
+  "termsOfService": "Terms of Service",
+  "version": "Version",
+  "howToUse": "How to use",
+  "rateApp": "Rate in RuStore",
+  "ourApps": "Our Apps",
+
+  "onboardingTitle1": "Cheap Flights",
+  "onboardingDesc1": "Find the best prices across all airlines in one tap",
+  "onboardingTitle2": "Best Hotels",
+  "onboardingDesc2": "Compare prices for hotels, hostels and apartments worldwide",
+  "onboardingTitle3": "ЛетиУмно AI",
+  "onboardingDesc3": "AI builds the perfect itinerary for your budget and preferences",
+  "onboardingTitle4": "Save on Travel!",
+  "onboardingDesc4": "Price drop alerts, tips and curated picks from your AI assistant",
+
+  "next": "Next",
+  "skip": "Skip",
+  "getStarted": "Get Started",
+
+  "noResults": "No results found",
+  "error": "An error occurred",
+  "retry": "Retry",
+  "loading": "Loading...",
+  "noInternet": "No internet connection",
+
+  "perPerson": "per person",
+  "perNight": "per night",
+  "direct": "Direct",
+  "withStops": "{count} stop",
+  "@withStops": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "hours": "{count}h",
+  "@hours": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "minutes": "{count}m",
+  "@minutes": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+
+  "privacyPolicyTitle": "Privacy Policy",
+  "privacyLastUpdated": "Last updated: July 2, 2026",
+  "privacySection1Title": "1. General Provisions",
+  "privacySection1Body": "This Privacy Policy is developed in accordance with Federal Law No. 152-FZ dated 27.07.2006 \"On Personal Data\".\n\nData controller: IE Zubkov S.S. (hereinafter — the Developer).\nApplication: \"ЛетиУмно\" (hereinafter — the Application).",
+  "privacySection2Title": "2. Data We Collect",
+  "privacySection2Body": "The Application may collect:\n• Search queries — routes, dates, number of passengers. Used only for searching.\n• App settings (language, theme) — stored ONLY on your device.\n\nThe Application does NOT collect: full name, address, phone, email, geolocation, bank card data, advertising identifiers.",
+  "privacySection3Title": "3. Purposes of Data Processing",
+  "privacySection3Body": "• Searching for flights and hotels by user request\n• Providing AI recommendations for travel planning\n• Improving the quality of the application",
+  "privacySection4Title": "4. Data Storage and Protection",
+  "privacySection4Body": "• All data is stored exclusively on the user's device.\n• Search queries are transmitted over an encrypted channel (HTTPS/TLS).\n• The Developer does not have access to the user's local data.",
+  "privacySection5Title": "5. Data Sharing with Third Parties",
+  "privacySection5Body": "Search queries are transmitted to partner services (Travelpayouts) for searching flights and hotels.\n• Data is not stored on third-party servers after processing.\n• The Developer does not sell or share user data with third parties.",
+  "privacySection6Title": "6. User Rights (Art. 14 No. 152-FZ)",
+  "privacySection6Body": "In accordance with Federal Law No. 152-FZ you have the right to:\n• Obtain information about the processing of your data\n• Request deletion of your data\n• Withdraw consent to data processing\n\nTo delete all data, simply uninstall the application.",
+  "privacySection7Title": "7. Cookies and Analytics",
+  "privacySection7Body": "The Application does not use cookies or advertising trackers. The Application does not require registration.",
+  "privacySection8Title": "8. Age Restrictions",
+  "privacySection8Body": "The Application is intended for persons aged 12 and older.",
+  "privacySection9Title": "9. Policy Changes",
+  "privacySection9Body": "The Developer reserves the right to update this Policy. The current version is always available in the application.",
+  "privacySection10Title": "10. Contact",
+  "privacySection10Body": "For questions about data processing: zubcoder.app@yandex.ru",
+
+  "termsTitle": "Terms of Service",
+  "termsLastUpdated": "Last updated: July 2, 2026",
+  "termsSection1Title": "1. General Provisions",
+  "termsSection1Body": "These Terms of Service govern the use of the mobile application \"ЛетиУмно\", developed by IE Zubkov S.S.\n\nBy using the Application, you confirm your agreement to these Terms.",
+  "termsSection2Title": "2. Service Description",
+  "termsSection2Body": "The Application provides:\n• Searching and comparing flight prices\n• Searching and comparing hotel prices\n• AI recommendations for travel planning",
+  "termsSection3Title": "3. Travel Disclaimer",
+  "termsSection3Body": "IMPORTANT: The Application provides reference information only. The Application is NOT a travel agency and does NOT sell tickets or book hotels directly. Booking is done on partner websites.",
+  "termsSection4Title": "4. Limitation of Liability",
+  "termsSection4Body": "• Search results are for informational purposes.\n• The Developer is NOT responsible for prices, availability, or booking conditions on partner sites.\n• The Developer does NOT guarantee 100% accuracy of prices and availability.",
+  "termsSection5Title": "5. Subscriptions and Payments",
+  "termsSection5Body": "Basic functionality is free. Additional features may be available through RuStore subscription.",
+  "termsSection6Title": "6. Intellectual Property",
+  "termsSection6Body": "All rights to the Application belong to the Developer. Copying, decompilation, and distribution of the Application is prohibited.",
+  "termsSection7Title": "7. User Rights and Obligations",
+  "termsSection7Body": "The user agrees to use the Application in accordance with the legislation of the Russian Federation.",
+  "termsSection8Title": "8. Age Restrictions",
+  "termsSection8Body": "The Application is intended for persons aged 12 and older.",
+  "termsSection9Title": "9. Governing Law and Dispute Resolution",
+  "termsSection9Body": "These Terms are governed by the laws of the Russian Federation. Disputes are resolved through negotiation.",
+  "termsSection10Title": "10. Contact",
+  "termsSection10Body": "For questions: zubcoder.app@yandex.ru"
+}
