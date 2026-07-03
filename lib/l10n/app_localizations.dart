@@ -101,7 +101,7 @@ abstract class AppLocalizations {
   /// No description provided for @appTitle.
   ///
   /// In ru, this message translates to:
-  /// **'Let\'s Go Travel'**
+  /// **'ЛетиУмно'**
   String get appTitle;
 
   /// No description provided for @appTagline.
@@ -251,7 +251,7 @@ abstract class AppLocalizations {
   /// No description provided for @aiPlannerTitle.
   ///
   /// In ru, this message translates to:
-  /// **'Let\'s Go Travel AI'**
+  /// **'ЛетиУмно AI'**
   String get aiPlannerTitle;
 
   /// No description provided for @aiPlannerHint.
@@ -383,7 +383,7 @@ abstract class AppLocalizations {
   /// No description provided for @onboardingTitle3.
   ///
   /// In ru, this message translates to:
-  /// **'Let\'s Go Travel AI'**
+  /// **'ЛетиУмно AI'**
   String get onboardingTitle3;
 
   /// No description provided for @onboardingDesc3.
@@ -509,7 +509,7 @@ abstract class AppLocalizations {
   /// No description provided for @privacySection1Body.
   ///
   /// In ru, this message translates to:
-  /// **'Настоящая Политика конфиденциальности разработана в соответствии с Федеральным законом от 27.07.2006 №152-ФЗ «О персональных данных».\n\nОператор персональных данных: ИП Зубков С.С. (далее — Разработчик).\nПриложение: «Let\'s Go Travel» (далее — Приложение).'**
+  /// **'Настоящая Политика конфиденциальности разработана в соответствии с Федеральным законом от 27.07.2006 №152-ФЗ «О персональных данных».\n\nОператор персональных данных: ИП Зубков С.С. (далее — Разработчик).\nПриложение: «ЛетиУмно» (далее — Приложение).'**
   String get privacySection1Body;
 
   /// No description provided for @privacySection2Title.
@@ -641,7 +641,7 @@ abstract class AppLocalizations {
   /// No description provided for @termsSection1Body.
   ///
   /// In ru, this message translates to:
-  /// **'Настоящее Пользовательское соглашение регулирует использование мобильного приложения «Let\'s Go Travel», разработанного ИП Зубков С.С.\n\nИспользуя Приложение, вы подтверждаете согласие с условиями настоящего Соглашения.'**
+  /// **'Настоящее Пользовательское соглашение регулирует использование мобильного приложения «ЛетиУмно», разработанного ИП Зубков С.С.\n\nИспользуя Приложение, вы подтверждаете согласие с условиями настоящего Соглашения.'**
   String get termsSection1Body;
 
   /// No description provided for @termsSection2Title.

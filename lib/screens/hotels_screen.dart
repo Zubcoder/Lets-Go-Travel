@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../l10n/app_localizations.dart';
-import '../providers/search_provider.dart';
 import '../utils/constants.dart';
-import '../widgets/hotel_card.dart';
 
 class HotelsScreen extends StatefulWidget {
   const HotelsScreen({super.key});
@@ -17,6 +15,16 @@ class _HotelsScreenState extends State<HotelsScreen> {
   DateTime? _checkIn;
   DateTime? _checkOut;
   int _guests = 1;
+
+  static const _cityEn = <String, String>{
+    'москва': 'Moscow', 'сочи': 'Sochi', 'санкт-петербург': 'Saint-Petersburg',
+    'казань': 'Kazan', 'калининград': 'Kaliningrad', 'анталья': 'Antalya',
+    'анталия': 'Antalya', 'стамбул': 'Istanbul', 'дубай': 'Dubai',
+    'тбилиси': 'Tbilisi', 'париж': 'Paris', 'рим': 'Rome',
+    'барселона': 'Barcelona', 'прага': 'Prague', 'бали': 'Bali',
+    'пхукет': 'Phuket', 'хургада': 'Hurghada', 'ереван': 'Yerevan',
+    'баку': 'Baku', 'бангкок': 'Bangkok', 'минводы': 'Mineralnye-Vody',
+  };
 
   @override
   void dispose() {
@@ -46,14 +54,17 @@ class _HotelsScreenState extends State<HotelsScreen> {
     if (_locationController.text.isEmpty) return;
     if (_checkIn == null || _checkOut == null) return;
 
-    context.read<SearchProvider>().searchHotels(
-          location: _locationController.text.trim(),
-          checkIn:
-              '${_checkIn!.year}-${_checkIn!.month.toString().padLeft(2, '0')}-${_checkIn!.day.toString().padLeft(2, '0')}',
-          checkOut:
-              '${_checkOut!.year}-${_checkOut!.month.toString().padLeft(2, '0')}-${_checkOut!.day.toString().padLeft(2, '0')}',
-          guests: _guests,
-        );
+    final city = _locationController.text.trim();
+    final cityEn = _cityEn[city.toLowerCase()] ?? city;
+    final checkIn = '${_checkIn!.year}-${_checkIn!.month.toString().padLeft(2, '0')}-${_checkIn!.day.toString().padLeft(2, '0')}';
+    final checkOut = '${_checkOut!.year}-${_checkOut!.month.toString().padLeft(2, '0')}-${_checkOut!.day.toString().padLeft(2, '0')}';
+
+    final url = 'https://search.hotellook.com/hotels'
+        '?destination=${Uri.encodeComponent(cityEn)}'
+        '&checkIn=$checkIn&checkOut=$checkOut'
+        '&adults=$_guests&marker=${AppConstants.marker}';
+
+    launchUrl(Uri.parse(url), mode: LaunchMode.externalApplication);
   }
 
   String _formatDate(DateTime? date) {
@@ -145,58 +156,22 @@ class _HotelsScreenState extends State<HotelsScreen> {
               ),
             ),
             const SizedBox(height: 24),
-            Consumer<SearchProvider>(
-              builder: (context, provider, _) {
-                if (provider.isLoading) {
-                  return const Center(
-                    child: Padding(
-                      padding: EdgeInsets.all(32),
-                      child: CircularProgressIndicator(),
-                    ),
-                  );
-                }
-                if (provider.error != null) {
-                  return Center(
-                    child: Padding(
-                      padding: const EdgeInsets.all(32),
-                      child: Column(
-                        children: [
-                          Icon(Icons.error_outline,
-                              size: 48, color: AppColors.error),
-                          const SizedBox(height: 8),
-                          Text(l10n.error,
-                              style: theme.textTheme.titleMedium),
-                        ],
-                      ),
-                    ),
-                  );
-                }
-                if (provider.hotels.isEmpty) {
-                  return Padding(
-                    padding: const EdgeInsets.all(32),
-                    child: Center(
-                      child: Column(
-                        children: [
-                          Icon(Icons.hotel,
-                              size: 64,
-                              color: AppColors.accent.withValues(alpha: 0.3)),
-                          const SizedBox(height: 16),
-                          Text(l10n.bestDeals,
-                              style: theme.textTheme.titleLarge),
-                        ],
-                      ),
-                    ),
-                  );
-                }
-                return Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+            Padding(
+              padding: const EdgeInsets.all(32),
+              child: Center(
+                child: Column(
                   children: [
-                    Text(l10n.bestDeals, style: theme.textTheme.titleLarge),
-                    const SizedBox(height: 12),
-                    ...provider.hotels.map((h) => HotelCard(hotel: h)),
+                    Icon(Icons.hotel,
+                        size: 64,
+                        color: AppColors.accent.withValues(alpha: 0.3)),
+                    const SizedBox(height: 16),
+                    Text('Поиск откроет Hotellook\nс актуальными ценами',
+                        textAlign: TextAlign.center,
+                        style: theme.textTheme.titleMedium?.copyWith(
+                            color: AppColors.textSecondary)),
                   ],
-                );
-              },
+                ),
+              ),
             ),
           ],
         ),

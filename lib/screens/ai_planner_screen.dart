@@ -107,7 +107,7 @@ class _AiPlannerScreenState extends State<AiPlannerScreen> {
               children: [
                 Text('ЛетиУмно AI',
                     style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
-                Text('Ваш travel-консьерж',
+                Text('Ваш умный помощник',
                     style: TextStyle(fontSize: 11, color: AppColors.accent)),
               ],
             ),

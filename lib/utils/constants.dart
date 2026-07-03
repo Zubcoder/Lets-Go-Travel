@@ -33,6 +33,7 @@ class AppConstants {
   static const String searchDatePrefKey = 'search_date';
 
   static const String baseUrl = 'https://letiumno-api.fly.dev';
+  static const String marker = '746125';
 
   // Affiliate partner URLs (Travelpayouts marker will be appended)
   static const String aviasalesUrl = 'https://www.aviasales.ru';
@@ -43,5 +44,5 @@ class AppConstants {
   static const String chereahapaUrl = 'https://cherehapa.ru';
   static const String yesimUrl = 'https://www.yesim.app';
   static const String kiwitaxiUrl = 'https://kiwitaxi.com';
-  static const String telegramBotUrl = 'https://t.me/Lets_Go_Travel_bot';
+  static const String telegramBotUrl = 'https://t.me/LetiUmno_bot';
 }
