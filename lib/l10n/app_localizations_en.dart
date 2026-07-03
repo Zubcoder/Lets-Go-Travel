@@ -9,7 +9,7 @@ class AppLocalizationsEn extends AppLocalizations {
   AppLocalizationsEn([String locale = 'en']) : super(locale);
 
   @override
-  String get appTitle => 'Let\'s Go Travel';
+  String get appTitle => 'ЛетиУмно';
 
   @override
   String get appTagline => 'AI Travel Assistant';
@@ -84,7 +84,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get bestDeals => 'Best Deals';
 
   @override
-  String get aiPlannerTitle => 'Let\'s Go Travel AI';
+  String get aiPlannerTitle => 'ЛетиУмно AI';
 
   @override
   String get aiPlannerHint => 'Describe your ideal trip...';
@@ -153,7 +153,7 @@ class AppLocalizationsEn extends AppLocalizations {
       'Compare prices for hotels, hostels and apartments worldwide';
 
   @override
-  String get onboardingTitle3 => 'Let\'s Go Travel AI';
+  String get onboardingTitle3 => 'ЛетиУмно AI';
 
   @override
   String get onboardingDesc3 =>
@@ -225,7 +225,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get privacySection1Body =>
-      'This Privacy Policy is developed in accordance with Federal Law No. 152-FZ dated 27.07.2006 \"On Personal Data\".\n\nData controller: IE Zubkov S.S. (hereinafter — the Developer).\nApplication: \"Let\'s Go Travel\" (hereinafter — the Application).';
+      'This Privacy Policy is developed in accordance with Federal Law No. 152-FZ dated 27.07.2006 \"On Personal Data\".\n\nData controller: IE Zubkov S.S. (hereinafter — the Developer).\nApplication: \"ЛетиУмно\" (hereinafter — the Application).';
 
   @override
   String get privacySection2Title => '2. Data We Collect';
@@ -301,7 +301,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get termsSection1Body =>
-      'These Terms of Service govern the use of the mobile application \"Let\'s Go Travel\", developed by IE Zubkov S.S.\n\nBy using the Application, you confirm your agreement to these Terms.';
+      'These Terms of Service govern the use of the mobile application \"ЛетиУмно\", developed by IE Zubkov S.S.\n\nBy using the Application, you confirm your agreement to these Terms.';
 
   @override
   String get termsSection2Title => '2. Service Description';

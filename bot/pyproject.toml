@@ -1,7 +1,7 @@
 [project]
-name = "lets-go-travel-bot"
+name = "letiumno-bot"
 version = "1.0.0"
-description = "Let's Go Travel Telegram Bot — AI trip planner with affiliate search"
+description = "ЛетиУмно Telegram Bot — AI trip planner with affiliate search"
 requires-python = ">=3.11"
 dependencies = [
     "aiogram>=3.15.0,<4.0",

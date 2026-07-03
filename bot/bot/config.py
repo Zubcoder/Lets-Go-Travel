@@ -12,11 +12,11 @@ class Config:
     TRAVELPAYOUTS_MARKER: str = os.getenv("TRAVELPAYOUTS_MARKER", "")
     RUSTORE_URL: str = os.getenv(
         "RUSTORE_URL",
-        "https://apps.rustore.ru/app/com.zubcoder.lets_go_travel",
+        "https://apps.rustore.ru/app/com.zubcoder.letiumno",
     )
     WEBSITE_URL: str = os.getenv(
         "WEBSITE_URL",
-        "https://zubcoder.github.io/Lets-Go-Travel/",
+        "https://xn--e1afkclhg3b5e.xn--p1ai/",
     )
     AVIASALES_BASE: str = "https://www.aviasales.ru"
     HOTELLOOK_BASE: str = "https://www.hotellook.ru"

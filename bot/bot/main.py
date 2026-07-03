@@ -1,4 +1,4 @@
-"""Let's Go Travel Telegram Bot — entry point."""
+"""ЛетиУмно Telegram Bot — entry point."""
 
 import asyncio
 import logging
@@ -27,7 +27,7 @@ async def _run() -> None:
     dp = Dispatcher(storage=MemoryStorage())
     dp.include_router(router)
 
-    logger.info("Let's Go Travel Bot starting...")
+    logger.info("ЛетиУмно Bot starting...")
     await dp.start_polling(bot)
 
 

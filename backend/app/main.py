@@ -5,8 +5,8 @@ from .config import settings
 from .routers import ai, flights, health, hotels
 
 app = FastAPI(
-    title="Let's Go Travel API",
-    description="Backend proxy for Let's Go Travel app",
+    title="ЛетиУмно API",
+    description="Backend proxy for ЛетиУмно app",
     version="1.0.0",
 )
 

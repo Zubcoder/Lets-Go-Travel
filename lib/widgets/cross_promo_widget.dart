@@ -4,7 +4,7 @@ import 'package:url_launcher/url_launcher.dart';
 class CrossPromoWidget extends StatelessWidget {
   const CrossPromoWidget({super.key});
 
-  static const _currentPackageId = 'com.zubcoder.lets_go_travel';
+  static const _currentPackageId = 'com.zubcoder.letiumno';
 
   static const _apps = <_AppInfo>[
     _AppInfo(

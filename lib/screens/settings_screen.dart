@@ -114,7 +114,7 @@ class SettingsScreen extends StatelessWidget {
                   title: Text(l10n.rateApp),
                   trailing: const Icon(Icons.chevron_right),
                   onTap: () => launchUrl(Uri.parse(
-                      'https://apps.rustore.ru/app/com.zubcoder.lets_go_travel')),
+                      'https://apps.rustore.ru/app/com.zubcoder.letiumno')),
                 ),
               ],
             ),

@@ -50,7 +50,7 @@ def _main_keyboard() -> types.InlineKeyboardMarkup:
 @router.message(CommandStart())
 async def cmd_start(message: types.Message) -> None:
     text = (
-        "✈️ <b>Let's Go Travel</b> — AI-помощник для путешествий!\n\n"
+        "✈️ <b>ЛетиУмно</b> — AI-помощник для путешествий!\n\n"
         "Я помогу найти дешёвые авиабилеты, спланировать маршрут "
         "и сэкономить на поездке.\n\n"
         "Что умею:\n"
@@ -74,7 +74,7 @@ async def cmd_app(message: types.Message) -> None:
     builder.button(text="🌐 Открыть сайт", url=config.WEBSITE_URL)
     builder.adjust(1)
     await message.answer(
-        "📱 <b>Let's Go Travel</b> — мобильное приложение\n\n"
+        "📱 <b>ЛетиУмно</b> — мобильное приложение\n\n"
         "В приложении доступно больше возможностей:\n"
         "• Полный AI-планировщик маршрутов\n"
         "• Поиск отелей с фото и отзывами\n"
@@ -235,7 +235,7 @@ async def cmd_popular(event: types.Message | types.CallbackQuery) -> None:
 @router.callback_query(F.data == "action:plan")
 async def cmd_plan(event: types.Message | types.CallbackQuery, state: FSMContext) -> None:
     text = (
-        "🤖 <b>Let's Go Travel AI</b> — Умный помощник в путешествии\n\n"
+        "🤖 <b>ЛетиУмно AI</b> — Умный помощник в путешествии\n\n"
         "Опишите ваше идеальное путешествие, например:\n"
         "<i>Хочу на море в августе, бюджет 50 000₽ на двоих, из Москвы</i>\n\n"
         "Для выхода из режима планировщика — /cancel"

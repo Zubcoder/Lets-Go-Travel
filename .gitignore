@@ -39,3 +39,4 @@ backend/app/routers/__pycache__/
 # Misc
 .DS_Store
 *.log
+bot/lets_go_travel_bot.egg-info/

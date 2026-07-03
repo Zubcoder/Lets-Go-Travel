@@ -1,4 +1,4 @@
-app = "lets-go-travel-api"
+app = "letiumno-api"
 primary_region = "ams"
 
 [build]

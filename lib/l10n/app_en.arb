@@ -1,6 +1,6 @@
 {
   "@@locale": "en",
-  "appTitle": "Let's Go Travel",
+  "appTitle": "ЛетиУмно",
   "appTagline": "AI Travel Assistant",
 
   "search": "Search",
@@ -29,7 +29,7 @@
   "searchHotelsButton": "Find Hotels",
   "bestDeals": "Best Deals",
 
-  "aiPlannerTitle": "Let's Go Travel AI",
+  "aiPlannerTitle": "ЛетиУмно AI",
   "aiPlannerHint": "Describe your ideal trip...",
   "aiPlannerExample": "E.g.: Beach vacation in August, budget $1000 for two, from New York",
   "planTrip": "Plan Trip",
@@ -53,7 +53,7 @@
   "onboardingDesc1": "Find the best prices across all airlines in one tap",
   "onboardingTitle2": "Best Hotels",
   "onboardingDesc2": "Compare prices for hotels, hostels and apartments worldwide",
-  "onboardingTitle3": "Let's Go Travel AI",
+  "onboardingTitle3": "ЛетиУмно AI",
   "onboardingDesc3": "AI builds the perfect itinerary for your budget and preferences",
   "onboardingTitle4": "Save on Travel!",
   "onboardingDesc4": "Price drop alerts, tips and curated picks from your AI assistant",
@@ -93,7 +93,7 @@
   "privacyPolicyTitle": "Privacy Policy",
   "privacyLastUpdated": "Last updated: July 2, 2026",
   "privacySection1Title": "1. General Provisions",
-  "privacySection1Body": "This Privacy Policy is developed in accordance with Federal Law No. 152-FZ dated 27.07.2006 \"On Personal Data\".\n\nData controller: IE Zubkov S.S. (hereinafter — the Developer).\nApplication: \"Let's Go Travel\" (hereinafter — the Application).",
+  "privacySection1Body": "This Privacy Policy is developed in accordance with Federal Law No. 152-FZ dated 27.07.2006 \"On Personal Data\".\n\nData controller: IE Zubkov S.S. (hereinafter — the Developer).\nApplication: \"ЛетиУмно\" (hereinafter — the Application).",
   "privacySection2Title": "2. Data We Collect",
   "privacySection2Body": "The Application may collect:\n• Search queries — routes, dates, number of passengers. Used only for searching.\n• App settings (language, theme) — stored ONLY on your device.\n\nThe Application does NOT collect: full name, address, phone, email, geolocation, bank card data, advertising identifiers.",
   "privacySection3Title": "3. Purposes of Data Processing",
@@ -116,7 +116,7 @@
   "termsTitle": "Terms of Service",
   "termsLastUpdated": "Last updated: July 2, 2026",
   "termsSection1Title": "1. General Provisions",
-  "termsSection1Body": "These Terms of Service govern the use of the mobile application \"Let's Go Travel\", developed by IE Zubkov S.S.\n\nBy using the Application, you confirm your agreement to these Terms.",
+  "termsSection1Body": "These Terms of Service govern the use of the mobile application \"ЛетиУмно\", developed by IE Zubkov S.S.\n\nBy using the Application, you confirm your agreement to these Terms.",
   "termsSection2Title": "2. Service Description",
   "termsSection2Body": "The Application provides:\n• Searching and comparing flight prices\n• Searching and comparing hotel prices\n• AI recommendations for travel planning",
   "termsSection3Title": "3. Travel Disclaimer",

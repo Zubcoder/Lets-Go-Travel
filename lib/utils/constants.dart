@@ -18,8 +18,8 @@ class AppColors {
 }
 
 class AppConstants {
-  static const String appName = "Let's Go Travel";
-  static const String appNameRu = "Let's Go Travel";
+  static const String appName = 'ЛетиУмно';
+  static const String appNameRu = 'ЛетиУмно';
   static const String appTagline = 'AI-помощник для путешествий';
   static const String appVersion = '1.0.0';
   static const String supportEmail = 'zubcoder.app@yandex.ru';
@@ -32,7 +32,7 @@ class AppConstants {
   static const String searchCountPrefKey = 'search_count';
   static const String searchDatePrefKey = 'search_date';
 
-  static const String baseUrl = 'https://lets-go-travel-api.fly.dev';
+  static const String baseUrl = 'https://letiumno-api.fly.dev';
 
   // Affiliate partner URLs (Travelpayouts marker will be appended)
   static const String aviasalesUrl = 'https://www.aviasales.ru';
@@ -43,5 +43,5 @@ class AppConstants {
   static const String chereahapaUrl = 'https://cherehapa.ru';
   static const String yesimUrl = 'https://www.yesim.app';
   static const String kiwitaxiUrl = 'https://kiwitaxi.com';
-  static const String telegramBotUrl = 'https://t.me/LetsGoTravelAIBot';
+  static const String telegramBotUrl = 'https://t.me/Lets_Go_Travel_bot';
 }

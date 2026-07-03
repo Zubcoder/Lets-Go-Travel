@@ -1,7 +1,7 @@
 [project]
-name = "lets-go-travel-api"
+name = "letiumno-api"
 version = "1.0.0"
-description = "Backend proxy for Let's Go Travel app"
+description = "Backend proxy for ЛетиУмно app"
 requires-python = ">=3.11"
 dependencies = [
     "fastapi>=0.115",
