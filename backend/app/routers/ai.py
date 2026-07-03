@@ -63,7 +63,7 @@ async def plan_trip(request: PlanRequest):
         raise HTTPException(status_code=503, detail="AI service not configured")
 
     genai.configure(api_key=settings.gemini_api_key)
-    model = genai.GenerativeModel("gemini-2.5-flash")
+    model = genai.GenerativeModel("gemini-2.0-flash")
 
     marker = settings.travelpayouts_marker
 

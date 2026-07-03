@@ -142,7 +142,7 @@ async def ai_plan_trip(user_message: str, history: list[dict] | None = None) -> 
     contents.append({"role": "user", "parts": [{"text": user_message}]})
 
     response = client.models.generate_content(
-        model="gemini-2.5-flash",
+        model="gemini-2.0-flash",
         contents=contents,
     )
     return response.text or "Не удалось получить ответ. Попробуйте ещё раз."

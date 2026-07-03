@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+import re
+
 from aiogram import F, Router, types
 from aiogram.filters import Command, CommandStart
 from aiogram.fsm.context import FSMContext
@@ -17,6 +19,25 @@ from .services import (
     search_flights,
     search_popular_destinations,
 )
+
+# Telegram HTML only supports: b, i, u, s, a, code, pre, tg-spoiler, blockquote
+_ALLOWED_TAGS = {"b", "i", "u", "s", "a", "code", "pre", "tg-spoiler", "blockquote"}
+
+
+def sanitize_html(text: str) -> str:
+    """Remove unsupported HTML tags, keep only Telegram-allowed ones."""
+    # Replace <br>, <br/>, <br /> with newlines
+    text = re.sub(r"<br\s*/?>", "\n", text, flags=re.IGNORECASE)
+    # Replace <p>...</p> with content + double newline
+    text = re.sub(r"<p>(.*?)</p>", r"\1\n\n", text, flags=re.IGNORECASE | re.DOTALL)
+    # Remove opening tags not in allowed list (but keep their content)
+    def _strip_tag(m: re.Match) -> str:
+        tag = m.group(1).lower().split()[0]
+        if tag in _ALLOWED_TAGS:
+            return m.group(0)
+        return ""
+    text = re.sub(r"<(/?)(\w+)([^>]*)>", lambda m: m.group(0) if m.group(2).lower().split("/")[0] in _ALLOWED_TAGS else "", text)
+    return text.strip()
 
 router = Router()
 
@@ -320,16 +341,25 @@ async def process_plan(message: types.Message) -> None:
     builder.button(text="🌐 Сайт", url=config.WEBSITE_URL)
     builder.adjust(1)
 
-    # Truncate if too long for Telegram (4096 chars max)
+    # Sanitize HTML and truncate
+    response = sanitize_html(response)
     if len(response) > 3800:
         response = response[:3800] + "\n\n... <i>Полный план доступен в приложении</i> 📱"
 
-    await message.answer(
-        response,
-        reply_markup=builder.as_markup(),
-        parse_mode="HTML",
-        disable_web_page_preview=True,
-    )
+    try:
+        await message.answer(
+            response,
+            reply_markup=builder.as_markup(),
+            parse_mode="HTML",
+            disable_web_page_preview=True,
+        )
+    except Exception:
+        # Fallback: send without HTML parsing if sanitization wasn't enough
+        await message.answer(
+            response,
+            reply_markup=builder.as_markup(),
+            disable_web_page_preview=True,
+        )
 
 
 # ── Catch-all free text → auto-plan ─────────────────────────────────────────
@@ -359,12 +389,22 @@ async def handle_text(message: types.Message, state: FSMContext) -> None:
     builder.button(text="🌐 Сайт", url=config.WEBSITE_URL)
     builder.adjust(2)
 
+    # Sanitize HTML and truncate
+    response = sanitize_html(response)
     if len(response) > 3800:
         response = response[:3800] + "\n\n... <i>Полный план доступен в приложении</i> 📱"
 
-    await message.answer(
-        response,
-        reply_markup=builder.as_markup(),
-        parse_mode="HTML",
-        disable_web_page_preview=True,
-    )
+    try:
+        await message.answer(
+            response,
+            reply_markup=builder.as_markup(),
+            parse_mode="HTML",
+            disable_web_page_preview=True,
+        )
+    except Exception:
+        # Fallback: send without HTML parsing if sanitization wasn't enough
+        await message.answer(
+            response,
+            reply_markup=builder.as_markup(),
+            disable_web_page_preview=True,
+        )
