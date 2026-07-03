@@ -1,3 +1,4 @@
+import httpx
 import google.generativeai as genai
 from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel
@@ -5,6 +6,50 @@ from pydantic import BaseModel
 from ..config import settings
 
 router = APIRouter()
+
+TRAVELPAYOUTS_BASE = "https://api.travelpayouts.com/aviasales/v3"
+
+# IATA code to city name mapping for popular Russian cities
+IATA_CITIES = {
+    "MOW": "Москва", "LED": "Санкт-Петербург", "AER": "Сочи",
+    "SVX": "Екатеринбург", "KZN": "Казань", "OVB": "Новосибирск",
+    "KRR": "Краснодар", "ROV": "Ростов-на-Дону", "UFA": "Уфа",
+    "VOG": "Волгоград", "KGD": "Калининград", "MRV": "Минеральные Воды",
+    "AYT": "Анталья", "IST": "Стамбул", "DXB": "Дубай",
+    "HRG": "Хургада", "SSH": "Шарм-эль-Шейх", "GYD": "Баку",
+    "TBS": "Тбилиси", "EVN": "Ереван", "BKK": "Бангкок",
+    "HKT": "Пхукет", "MLE": "Мальдивы", "GOI": "Гоа",
+    "CEB": "Себу", "DPS": "Бали", "NHA": "Нячанг",
+    "PEK": "Пекин", "ICN": "Сеул", "TYO": "Токио",
+    "DME": "Москва", "SVO": "Москва", "VKO": "Москва",
+    "KUF": "Самара", "MMK": "Мурманск", "ARH": "Архангельск",
+    "ULY": "Ульяновск", "CSY": "Чебоксары", "TBW": "Тамбов",
+    "KVX": "Киров", "MSQ": "Минск",
+}
+
+
+def city_name(iata: str) -> str:
+    return IATA_CITIES.get(iata.upper(), iata)
+
+
+async def _fetch_cheap_flights(origin: str = "MOW", limit: int = 5) -> list[dict]:
+    """Fetch real cheap flights for context."""
+    params = {
+        "origin": origin,
+        "unique": "true",
+        "sorting": "price",
+        "currency": "rub",
+        "limit": limit,
+        "token": settings.travelpayouts_token,
+    }
+    try:
+        async with httpx.AsyncClient(timeout=10) as client:
+            resp = await client.get(f"{TRAVELPAYOUTS_BASE}/prices_for_dates", params=params)
+            if resp.status_code == 200:
+                return resp.json().get("data", [])
+    except Exception:
+        pass
+    return []
 
 
 class PlanRequest(BaseModel):
@@ -20,24 +65,61 @@ async def plan_trip(request: PlanRequest):
     genai.configure(api_key=settings.gemini_api_key)
     model = genai.GenerativeModel("gemini-2.5-flash")
 
+    marker = settings.travelpayouts_marker
+
+    # Fetch real flight data for context
+    flights_data = await _fetch_cheap_flights()
+    flights_context = ""
+    if flights_data:
+        lines = []
+        for f in flights_data[:5]:
+            dest = f.get("destination", "")
+            price = f.get("price", 0)
+            date = f.get("departure_at", "")[:10]
+            lines.append(f"- {city_name(dest)} ({dest}): {price}₽, дата {date}")
+        flights_context = "\n".join(lines)
+
     lang = "русском" if request.locale == "ru" else "английском"
 
-    prompt = f"""Ты — опытный AI-помощник для путешествий. Составь подробный план путешествия на {lang} языке.
+    prompt = f"""Ты — AI-помощник "ЛетиУмно", персональный travel-консьерж.
 
-Запрос пользователя: {request.query}
+СТИЛЬ ОТВЕТА:
+- Пиши КРАСОЧНО и ВДОХНОВЛЯЮЩЕ — как лучший travel-блогер
+- Создавай атмосферу: описывай ощущения, виды, запахи, эмоции
+- Используй яркие эмодзи, но уместно (не перебарщивай)
+- Формат: Markdown с заголовками ## и списками
+- Язык: {lang}
 
-Составь план, включающий:
-1. Рекомендуемые направления (если не указано конкретное)
-2. Оптимальные даты поездки
-3. Примерный бюджет (авиабилеты, проживание, питание, развлечения)
-4. Рекомендации по перелётам (когда лучше покупать, какие авиакомпании)
-5. Варианты проживания (отели, хостелы, апартаменты)
-6. Достопримечательности и активности
-7. Практические советы (визы, валюта, транспорт, связь)
-8. Лайфхаки для экономии
+СТРУКТУРА ОТВЕТА:
+1. 🌟 Красочное вступление (2-3 предложения, создай предвкушение поездки)
+2. ✈️ Перелёт — конкретная рекомендация с ценой и ссылкой
+3. 🏨 Проживание — конкретный вариант с описанием и ссылкой
+4. 🎯 Что делать — 2-3 экскурсии/активности со ссылками
+5. 🚕 Трансфер + 🛡 Страховка — кратко, по 1 предложению
+6. 💰 Итого — подсчёт бюджета и сколько сэкономили
 
-Формат: используй Markdown с заголовками, списками и эмодзи для наглядности.
-Будь конкретным — указывай примерные цены в рублях, названия сервисов, конкретные рекомендации."""
+ПАРТНЁРСКИЕ ССЫЛКИ (вставляй ОРГАНИЧНО как рекомендации, НЕ как рекламу):
+- Авиабилеты: [текст](https://www.aviasales.ru/?marker={marker})
+- Отели: [текст](https://www.hotellook.ru/?marker={marker})
+- Экскурсии: [текст](https://experience.tripster.ru/?marker={marker}) или [текст](https://www.sputnik8.com/?marker={marker})
+- Аренда авто: [текст](https://www.discovercars.com/?marker={marker})
+- Страховка: [текст](https://cherehapa.ru/?marker={marker})
+- eSIM: [текст](https://www.yesim.app)
+- Трансфер: [текст](https://kiwitaxi.com/?marker={marker})
+
+РЕАЛЬНЫЕ ДАННЫЕ О ПЕРЕЛЁТАХ (используй в ответе):
+{flights_context if flights_context else "Данные временно недоступны — используй примерные цены"}
+
+ПРАВИЛА:
+- Каждая рекомендация — с конкретной ценой в рублях
+- Ссылки встраивай как "[Забронировать перелёт →](url)" или "[Посмотреть отели →](url)"
+- НЕ упоминай Gemini, ChatGPT или другие AI
+- НЕ пиши "партнёрская ссылка" — просто рекомендуй
+- Города — ПОЛНЫМИ НАЗВАНИЯМИ (Сочи, не AER)
+- Будь конкретным: названия отелей, маршруты экскурсий, время в пути
+- Если бюджет указан — уложись в него и покажи экономию
+
+Запрос пользователя: {request.query}"""
 
     try:
         response = await model.generate_content_async(prompt)

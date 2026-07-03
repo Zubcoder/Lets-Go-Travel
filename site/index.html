@@ -554,6 +554,68 @@
       .hero h1 { font-size: 28px; }
     }
 
+    /* Destinations */
+    .destinations-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 20px;
+      margin: 40px 0 60px;
+    }
+
+    .dest-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 24px;
+      transition: all 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .dest-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--accent-orange);
+      box-shadow: 0 8px 32px rgba(255,140,66,0.15);
+    }
+
+    .dest-emoji {
+      font-size: 36px;
+      margin-bottom: 12px;
+    }
+
+    .dest-title {
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .dest-price {
+      font-size: 14px;
+      color: var(--accent-orange);
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+
+    .dest-desc {
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      margin-bottom: 16px;
+    }
+
+    .dest-link {
+      display: inline-block;
+      color: var(--accent-teal);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 14px;
+      transition: color 0.2s;
+    }
+
+    .dest-link:hover {
+      color: var(--accent-teal-light);
+    }
+
     html { scroll-behavior: smooth; }
     ::selection { background: var(--accent-orange); color: white; }
   </style>
@@ -658,6 +720,77 @@
       </div>
     </div>
 
+    <!-- Dream Destinations -->
+    <h2 class="section-title">Мечтайте — мы <span>воплотим</span></h2>
+
+    <div class="destinations-grid">
+      <div class="dest-card">
+        <div class="dest-emoji">🌊</div>
+        <div class="dest-title">Сочи</div>
+        <div class="dest-price">от 4 166₽</div>
+        <div class="dest-desc">
+          Утро начинается с кофе на террасе с видом на горы. Через 10 минут вы уже на пляже,
+          а вечером — ужин в ресторане с панорамой на закат над Чёрным морем.
+        </div>
+        <a href="https://www.aviasales.ru/search/MOW1?marker=746125" class="dest-link" target="_blank" rel="noopener">Найти билет →</a>
+      </div>
+
+      <div class="dest-card">
+        <div class="dest-emoji">🕌</div>
+        <div class="dest-title">Стамбул</div>
+        <div class="dest-price">от 12 500₽</div>
+        <div class="dest-desc">
+          Запах свежей выпечки из пекарни, крик чаек над Босфором, величие Айя-Софии.
+          Город, где Восток встречает Запад — и вы в самом центре этой магии.
+        </div>
+        <a href="https://www.aviasales.ru/search/MOWIST1?marker=746125" class="dest-link" target="_blank" rel="noopener">Найти билет →</a>
+      </div>
+
+      <div class="dest-card">
+        <div class="dest-emoji">🏖</div>
+        <div class="dest-title">Анталья</div>
+        <div class="dest-price">от 15 000₽</div>
+        <div class="dest-desc">
+          Бирюзовое Средиземное море, all-inclusive отель с бассейном, экскурсии
+          в античные города. Идеальный отдых, где всё продумано за вас.
+        </div>
+        <a href="https://www.aviasales.ru/search/MOWAYT1?marker=746125" class="dest-link" target="_blank" rel="noopener">Найти билет →</a>
+      </div>
+
+      <div class="dest-card">
+        <div class="dest-emoji">🍷</div>
+        <div class="dest-title">Грузия</div>
+        <div class="dest-price">от 9 800₽</div>
+        <div class="dest-desc">
+          Хинкали в горном ресторанчике, вино из глиняного кувшина, серпантин
+          с видом на Казбек. Гостеприимство, которое невозможно забыть.
+        </div>
+        <a href="https://www.aviasales.ru/search/MOWTBS1?marker=746125" class="dest-link" target="_blank" rel="noopener">Найти билет →</a>
+      </div>
+
+      <div class="dest-card">
+        <div class="dest-emoji">🏔</div>
+        <div class="dest-title">Калининград</div>
+        <div class="dest-price">от 4 146₽</div>
+        <div class="dest-desc">
+          Балтийский бриз, янтарные пляжи, средневековые замки. Европа
+          без визы — с уютными кафе, мощёными улочками и закатами над морем.
+        </div>
+        <a href="https://www.aviasales.ru/search/MOWKGD1?marker=746125" class="dest-link" target="_blank" rel="noopener">Найти билет →</a>
+      </div>
+
+      <div class="dest-card">
+        <div class="dest-emoji">🌴</div>
+        <div class="dest-title">Дубай</div>
+        <div class="dest-price">от 18 000₽</div>
+        <div class="dest-desc">
+          Небоскрёбы до облаков, пустынное сафари на закате, шопинг мирового уровня.
+          Город будущего, где каждый день — как кадр из фильма.
+        </div>
+        <a href="https://www.aviasales.ru/search/MOWDXB1?marker=746125" class="dest-link" target="_blank" rel="noopener">Найти билет →</a>
+      </div>
+    </div>
+
     <!-- How it works -->
     <h2 class="section-title">Как это <span>работает</span></h2>
 
@@ -708,7 +841,7 @@
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
           Скачать в RuStore
         </a>
-        <a href="https://t.me/Lets_Go_Travel_bot" class="download-btn secondary" target="_blank" rel="noopener">
+        <a href="https://t.me/LetiUmno_bot" class="download-btn secondary" target="_blank" rel="noopener">
           🤖 Telegram бот
         </a>
         <a href="https://zubcoder.github.io" class="download-btn secondary" target="_blank" rel="noopener">

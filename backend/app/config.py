@@ -4,6 +4,7 @@ from pydantic_settings import BaseSettings
 class Settings(BaseSettings):
     gemini_api_key: str = ""
     travelpayouts_token: str = ""
+    travelpayouts_marker: str = ""
     cors_origins: list[str] = ["*"]
     debug: bool = False
 

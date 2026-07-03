@@ -9,17 +9,58 @@ from .config import config
 
 TRAVELPAYOUTS_API = "https://api.travelpayouts.com"
 
+# IATA code to city name mapping
+IATA_CITIES = {
+    "MOW": "Москва", "LED": "Санкт-Петербург", "AER": "Сочи",
+    "SVX": "Екатеринбург", "KZN": "Казань", "OVB": "Новосибирск",
+    "KRR": "Краснодар", "ROV": "Ростов-на-Дону", "UFA": "Уфа",
+    "KGD": "Калининград", "MRV": "Минеральные Воды",
+    "AYT": "Анталья", "IST": "Стамбул", "DXB": "Дубай",
+    "HRG": "Хургада", "SSH": "Шарм-эль-Шейх", "GYD": "Баку",
+    "TBS": "Тбилиси", "EVN": "Ереван", "BKK": "Бангкок",
+    "HKT": "Пхукет", "MLE": "Мальдивы", "GOI": "Гоа",
+    "DPS": "Бали", "NHA": "Нячанг",
+    "KUF": "Самара", "MMK": "Мурманск", "ULY": "Ульяновск",
+    "CSY": "Чебоксары", "TBW": "Тамбов", "KVX": "Киров", "MSQ": "Минск",
+}
+
+
+def city_name(iata: str) -> str:
+    """Convert IATA code to city name."""
+    return IATA_CITIES.get(iata.upper(), iata)
+
+
 SYSTEM_PROMPT = """\
-Ты — AI-помощник для путешествий "ЛетиУмно".
-Твоя задача — помочь пользователю спланировать поездку.
-Отвечай кратко, структурировано и дружелюбно.
-Используй эмодзи для наглядности.
-Рекомендуй конкретные действия: искать билеты, бронировать отель, оформить страховку.
-Если пользователь указал бюджет — укладывайся в него.
-Давай советы по экономии.
-Используй рубли (₽) для цен.
-Не упоминай конкретные AI-модели (Gemini, ChatGPT). Говори "наш AI".
-"""
+Ты — AI-помощник "ЛетиУмно", персональный travel-консьерж в Telegram.
+
+СТИЛЬ:
+- Пиши КРАСОЧНО и ВДОХНОВЛЯЮЩЕ, как лучший travel-блогер
+- Создавай атмосферу: описывай ощущения, виды, эмоции
+- Используй эмодзи уместно
+- Формат: HTML (используй <b>, <i>, <a href="">, НЕ markdown)
+- Кратко (Telegram ограничен 4096 символов) — только самое важное
+
+СТРУКТУРА:
+1. Красочное вступление (1-2 предложения)
+2. ✈️ Перелёт — цена + рекомендация
+3. 🏨 Проживание — конкретный вариант
+4. 🎯 Что делать — 1-2 активности
+5. 💰 Итого бюджет
+
+ССЫЛКИ (вставляй ОРГАНИЧНО):
+- Билеты: <a href="https://www.aviasales.ru/?marker={marker}">Найти билет →</a>
+- Отели: <a href="https://www.hotellook.ru/?marker={marker}">Забронировать →</a>
+- Экскурсии: <a href="https://experience.tripster.ru/?marker={marker}">Подробнее →</a>
+- Страховка: <a href="https://cherehapa.ru/?marker={marker}">Оформить →</a>
+- Трансфер: <a href="https://kiwitaxi.com/?marker={marker}">Заказать →</a>
+
+ПРАВИЛА:
+- Города ПОЛНЫМИ НАЗВАНИЯМИ (Сочи, не AER)
+- Цены в рублях (₽)
+- НЕ упоминай Gemini/ChatGPT
+- НЕ пиши "партнёрская ссылка"
+- Будь конкретным: названия, цены, маршруты
+""".replace("{marker}", config.TRAVELPAYOUTS_MARKER)
 
 
 async def search_flights(
@@ -110,12 +151,13 @@ def build_aviasales_link(origin: str, destination: str, depart_date: str) -> str
 def build_partner_links(destination: str) -> str:
     """Build a block of affiliate partner links for a destination."""
     marker = config.TRAVELPAYOUTS_MARKER
+    dest_name = city_name(destination)
     lines = [
-        f"🏨 Отели: {config.HOTELLOOK_BASE}/{destination}?marker={marker}",
-        f"🎭 Экскурсии: {config.TRIPSTER_BASE}?marker={marker}",
-        f"🚗 Аренда авто: {config.DISCOVERCARS_BASE}?marker={marker}",
-        f"🛡 Страховка: {config.CHEREHAPA_BASE}?marker={marker}",
-        f"📱 eSIM: {config.YESIM_BASE}",
-        f"🚕 Трансфер: {config.KIWITAXI_BASE}?marker={marker}",
+        f"🏨 <a href='{config.HOTELLOOK_BASE}/{destination}?marker={marker}'>Отели в {dest_name} →</a>",
+        f"🎭 <a href='{config.TRIPSTER_BASE}?marker={marker}'>Экскурсии →</a>",
+        f"🚗 <a href='{config.DISCOVERCARS_BASE}?marker={marker}'>Аренда авто (до 54%!) →</a>",
+        f"🛡 <a href='{config.CHEREHAPA_BASE}?marker={marker}'>Страховка (до 30%) →</a>",
+        f"📱 <a href='{config.YESIM_BASE}'>eSIM для связи →</a>",
+        f"🚕 <a href='{config.KIWITAXI_BASE}?marker={marker}'>Трансфер →</a>",
     ]
     return "\n".join(lines)
