@@ -133,19 +133,23 @@ async def ai_plan_trip(user_message: str, history: list[dict] | None = None) -> 
             "Используйте /search для поиска билетов!"
         )
 
-    client = genai.Client(api_key=config.GEMINI_API_KEY)
+    try:
+        client = genai.Client(api_key=config.GEMINI_API_KEY)
 
-    contents = [{"role": "user", "parts": [{"text": SYSTEM_PROMPT}]}]
-    if history:
-        for msg in history[-6:]:
-            contents.append(msg)
-    contents.append({"role": "user", "parts": [{"text": user_message}]})
+        contents = [{"role": "user", "parts": [{"text": SYSTEM_PROMPT}]}]
+        if history:
+            for msg in history[-6:]:
+                contents.append(msg)
+        contents.append({"role": "user", "parts": [{"text": user_message}]})
 
-    response = client.models.generate_content(
-        model="gemini-2.0-flash",
-        contents=contents,
-    )
-    return response.text or "Не удалось получить ответ. Попробуйте ещё раз."
+        response = client.models.generate_content(
+            model="gemini-2.5-flash",
+            contents=contents,
+            config={"thinking_config": {"thinking_budget": 0}},
+        )
+        return response.text or "Не удалось получить ответ. Попробуйте ещё раз."
+    except Exception as e:
+        return f"Произошла ошибка при обращении к AI. Попробуйте позже или используйте /search для поиска билетов."
 
 
 def build_aviasales_link(origin: str, destination: str, depart_date: str) -> str:
