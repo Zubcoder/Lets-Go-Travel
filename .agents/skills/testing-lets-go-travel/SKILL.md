@@ -1,60 +1,85 @@
 ---
 name: testing-lets-go-travel
-description: Test the ЛетиУмно website, legal docs, and Flutter app. Use when verifying UI changes, legal compliance, or responsive layout.
+description: Test the Let's Go Travel website, legal docs, and Flutter app. Use when verifying UI changes, legal compliance, or responsive layout.
 ---
 
-# Testing ЛетиУмно
+# Testing ЛетиУмно (летиумно.рф)
+
+## Production Site
+
+The site is deployed on GitHub Pages via the `gh-pages` branch at https://xn--e1aghgfgyj.xn--p1ai/ (летиумно.рф).
+After merging to main, changes must be deployed to `gh-pages` separately.
 
 ## What to Test
 
-### Website Landing Page (`site/index.html`)
-- Open `file:///path/to/repo/site/index.html` in Chrome
-- Verify hero section: "ЛетиУмно" title, "AI-помощник" tagline, animated airplane logo
-- Verify stats bar: 500+, 2M+, AI, RU/EN
-- Verify 4 feature cards: Авиабилеты, Отели, AI Планировщик, Экономия
-- Verify how-it-works: 4 numbered steps
-- Verify partners: Travelpayouts, Aviasales, Hotellook, Flutter, FastAPI, AI/ML
-- Verify footer: RuStore download button, Zubcoder Apps badge, email, privacy/terms links
-- Test mobile responsive at ~400px width via DevTools device toolbar (Ctrl+Shift+M with DevTools open)
+### Website Landing Page (index.html)
+- Navigate to https://xn--e1aghgfgyj.xn--p1ai/
+- Verify hero section: "ЛетиУмно" title, logo (tropical sunset), animated airplane, acrylic background
+- Verify stats bar: 500+, 2M+, AI, 0₽
+- Verify AI chat widget section with prompt suggestions
+- Verify 10 service cards: Aviasales, Островок, Level.Travel, Tripster, Cherehapa, Kiwitaxi, Tutu.ru, Сравни.ру, OnlineTours, VisaToHome
+  - All Travelpayouts links must contain `marker=${TRAVELPAYOUTS_MARKER}`
+  - VisaToHome link goes to visatohome.ru (no marker)
+  - Сравни.ру link goes to sravni.ru (no marker)
+- Verify 6 destination cards: Сочи, Стамбул, Анталья, Грузия, Калининград, Дубай
+  - Each "Найти билет" link should contain `origin_iata=MOW` and `marker=${TRAVELPAYOUTS_MARKER}`
+- Verify blog section: currently 7 articles (3 original + 4 SEO)
+- Verify partners bar: lists all 10 services + Gemini AI
+- Verify footer: email, privacy policy, terms links, "ИП Зубков С.В."
+- Test mobile responsive at ~400px width via DevTools device toolbar
 
-### Legal Documents (`docs/`)
-- `docs/privacy-policy.html` — must have exactly 10 sections (h2 headers 1-10)
-  - Section 1: mentions 152-ФЗ
-  - Section 6: references ст. 14 №152-ФЗ
-  - Section 10: contact email zubcoder.app@yandex.ru
-  - Must NOT mention "Gemini", "Google", or "ChatGPT" anywhere
-- `docs/terms-of-service.html` — must have exactly 10 sections
-  - Section 2: uses "облачные технологии" (not specific AI provider names)
-  - Section 3: travel disclaimer (NOT a travel agency)
-  - Section 9: Russian Federation law
-  - Must NOT mention "Gemini", "Google", or "ChatGPT"
+### Blog Articles (blog/*.html)
+- Each article should have:
+  - Back link "← ЛетиУмно" pointing to `../index.html`
+  - Tag badge (e.g. "Турция", "Подборка", "Гайд")
+  - Title, date, reading time
+  - Affiliate links with `marker=${TRAVELPAYOUTS_MARKER}`
+  - CTA button linking to `../index.html#ai-chat`
+  - Footer with copyright
+- SEO meta-tags: `<meta name="description">`, `<meta name="keywords">`, `<link rel="canonical">`
+- Current articles:
+  - turkey-2026.html, cheap-flights-tips.html, georgia-guide.html (original 3)
+  - august-2026.html, sochi-vs-turkey.html, travel-insurance-guide.html, visa-free-2026.html (new 4)
 
-### Flutter App
-- Run `flutter analyze` — should report 0 issues
-- No Android emulator is available on the VM, so UI testing requires a physical device or CI
-- Verify localization files: `lib/l10n/app_ru.arb` and `lib/l10n/app_en.arb` should have 135+ keys each
+### SEO Files
+- `sitemap.xml` — should list homepage + all blog articles with lastmod/changefreq/priority
+- `robots.txt` — should have User-agent, Allow, Sitemap, Host directives
 
-### Backend
-- Run `python3 -c "import ast; ast.parse(open('backend/app/main.py').read())"` to verify syntax
-- Backend requires `GEMINI_API_KEY` and `TRAVELPAYOUTS_TOKEN` environment variables to run
-- Health endpoint: `GET /health` returns `{"status": "ok"}`
+### Hotellook Migration Check
+- Search all blog articles for "hotellook" or "Hotellook" — should find NONE
+- Hotel links should point to `ostrovok.ru/?marker=${TRAVELPAYOUTS_MARKER}` with text mentioning "Островок"
 
-## Navigation Between Pages
-- Footer links use relative paths: `../docs/privacy-policy.html` and `../docs/terms-of-service.html`
-- These work when opening `site/index.html` directly but may break if served from a different root
+### Legal Documents (docs/)
+- `docs/privacy-policy.html` — 10 sections (h2 headers), mentions 152-ФЗ, contact zubcoder.app@yandex.ru
+- `docs/terms-of-service.html` — 10 sections, Russian Federation law, travel disclaimer
+- Must NOT mention "Gemini", "Google", or "ChatGPT" by name
+
+### Telegram Bot
+- Bot token is required to test (@LetiUmno_bot)
+- Bot should act as "gateway" to website with Russian-only services
+- /partners command should list: Aviasales, Ostrovok, Level.Travel, Tripster, Cherehapa, Kiwitaxi, Tutu.ru, Sravni.ru
+- Bot config: see `bot/bot/config.py` for service URLs
+
+## Navigation
+- Footer links from index.html use `../docs/` relative paths
+- Blog back links use `../index.html`
+- These paths work on gh-pages where files are at root level
 
 ## Devin Secrets Needed
-- `LETS_GO_TRAVEL_GEMINI_API_KEY` — for AI trip planner backend endpoint
-- `TRAVELPAYOUTS_TOKEN` — for flight/hotel search backend endpoints
+- `LETS_GO_TRAVEL_GEMINI_API_KEY` — for AI trip planner backend
+- `TRAVELPAYOUTS_TOKEN` — for flight/hotel search backend
+- `TELEGRAM_BOT_TOKEN` — for testing the Telegram bot
 
 ## Key Commands
-- `flutter analyze` — lint the Flutter app
-- `flutter test` — run Flutter unit tests
 - `cd backend && uvicorn app.main:app --reload` — start backend dev server
-- `dart format lib/` — format Dart code
+- Backend health: `GET /health` returns `{"status": "ok"}`
 
 ## Tips
-- The website is a single static HTML file with inline CSS/JS — no build step needed
-- Legal docs are also static HTML — just open in browser
-- Color scheme: primary #FF8C42 (orange), accent #00CEC9 (teal), background #0A0E21 (deep blue)
-- The Flutter app uses Provider for state management and SharedPreferences for persistence
+- The website is static HTML on gh-pages — no build step needed
+- To verify SEO meta-tags programmatically, use browser console: `document.querySelector('meta[name="description"]').content`
+- Color scheme: --orange #FF8C42, --teal #00CEC9, --bg #0a0a1a (dark)
+- All articles follow the same HTML template structure
+- When testing mobile, use DevTools device toolbar at 400px width — cards should stack single-column
+- GitHub Pages deployment may have transient failures — if deploy fails, try re-triggering or check the gh-pages branch directly
+- The Flutter app was removed from the project; focus testing on website, blog, SEO, and bot
+- sitemap.xml and robots.txt are served from root on gh-pages
