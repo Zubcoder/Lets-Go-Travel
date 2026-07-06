@@ -57,11 +57,10 @@ class PlanStates(StatesGroup):
 
 def _main_keyboard() -> types.InlineKeyboardMarkup:
     builder = InlineKeyboardBuilder()
-    builder.button(text="🤖 Travel AI", callback_data="action:plan")
+    builder.button(text="🤖 Спланировать поездку", callback_data="action:plan")
     builder.button(text="✈️ Дешёвые билеты", callback_data="action:popular")
-    builder.button(text="📱 Скачать приложение", url=config.RUSTORE_URL)
-    builder.button(text="🌐 Сайт", url=config.WEBSITE_URL)
-    builder.adjust(1, 1, 2)
+    builder.button(text="🌐 Сайт летиумно.рф", url=config.WEBSITE_URL)
+    builder.adjust(1, 1, 1)
     return builder.as_markup()
 
 
@@ -72,12 +71,11 @@ def _main_keyboard() -> types.InlineKeyboardMarkup:
 async def cmd_start(message: types.Message) -> None:
     text = (
         "🌟 <b>ЛетиУмно</b> — ваш умный помощник в путешествиях\n\n"
-        "Представьте: через пару минут у вас будет готовый план "
+        "Через пару минут у вас будет готовый план "
         "идеального путешествия — с перелётом, отелем, экскурсиями "
-        "и точным бюджетом. Всё это бесплатно.\n\n"
+        "и бюджетом. Всё бесплатно.\n\n"
         "💬 <b>Просто напишите мне:</b>\n"
         "<i>«Хочу на море в августе, 60 000₽ на двоих»</i>\n\n"
-        "И я подберу лучшие варианты с реальными ценами!\n\n"
         "Или выберите:"
     )
     await message.answer(text, reply_markup=_main_keyboard(), parse_mode="HTML")
@@ -89,18 +87,17 @@ async def cmd_start(message: types.Message) -> None:
 @router.message(Command("app"))
 async def cmd_app(message: types.Message) -> None:
     builder = InlineKeyboardBuilder()
-    builder.button(text="📱 Скачать в RuStore", url=config.RUSTORE_URL)
     builder.button(text="🌐 Открыть сайт", url=config.WEBSITE_URL)
     builder.adjust(1)
     await message.answer(
-        "📱 <b>ЛетиУмно</b> — полная версия\n\n"
-        "В приложении вас ждёт:\n"
-        "• 🤖 AI-планировщик без ограничений\n"
-        "• ✈️ Сравнение цен по всем авиакомпаниям\n"
-        "• 🏨 Отели с фото и отзывами\n"
-        "• 🎯 Экскурсии и активности\n"
-        "• 💰 Автоматический подсчёт бюджета\n\n"
-        "<i>Вы в одном шаге от идеального путешествия!</i> ✨",
+        "🌐 <b>ЛетиУмно</b> — летиумно.рф\n\n"
+        "На сайте вас ждёт:\n"
+        "• 🤖 AI-планировщик путешествий\n"
+        "• ✈️ Поиск авиабилетов\n"
+        "• 🏨 Бронирование отелей\n"
+        "• 🎯 Экскурсии и страховки\n"
+        "• 📖 Блог путешественника\n\n"
+        "<i>Всё для идеального путешествия!</i>",
         reply_markup=builder.as_markup(),
         parse_mode="HTML",
     )
@@ -233,7 +230,7 @@ async def process_date(message: types.Message, state: FSMContext) -> None:
 
     builder = InlineKeyboardBuilder()
     builder.button(text="🔥 Забронировать билет", url=link)
-    builder.button(text="📱 Больше в приложении", url=config.RUSTORE_URL)
+    builder.button(text="🌐 Больше на сайте", url=config.WEBSITE_URL)
     builder.adjust(1)
 
     await message.answer(
@@ -277,7 +274,7 @@ async def cmd_popular(event: types.Message | types.CallbackQuery) -> None:
 
     builder = InlineKeyboardBuilder()
     builder.button(text="🤖 Спланировать поездку", callback_data="action:plan")
-    builder.button(text="📱 Приложение", url=config.RUSTORE_URL)
+    builder.button(text="🌐 Сайт", url=config.WEBSITE_URL)
     builder.adjust(1)
 
     await msg.answer(
@@ -294,7 +291,7 @@ async def cmd_popular(event: types.Message | types.CallbackQuery) -> None:
 @router.callback_query(F.data == "action:plan")
 async def cmd_plan(event: types.Message | types.CallbackQuery, state: FSMContext) -> None:
     text = (
-        "🌟 <b>ЛетиУмно AI</b> — ваш умный помощник в путешествиях\n\n"
+        "🌟 <b>ЛетиУмно</b> — ваш умный помощник в путешествиях\n\n"
         "Расскажите о путешествии мечты, и я создам "
         "идеальный план с ценами и бронированием.\n\n"
         "💬 <b>Например:</b>\n"
@@ -337,14 +334,13 @@ async def process_plan(message: types.Message) -> None:
     _history[user_id] = user_history[-10:]
 
     builder = InlineKeyboardBuilder()
-    builder.button(text="📱 Полный план в приложении", url=config.RUSTORE_URL)
-    builder.button(text="🌐 Сайт", url=config.WEBSITE_URL)
+    builder.button(text="🌐 Подробнее на сайте", url=config.WEBSITE_URL)
     builder.adjust(1)
 
     # Sanitize HTML and truncate
     response = sanitize_html(response)
     if len(response) > 3800:
-        response = response[:3800] + "\n\n... <i>Полный план доступен в приложении</i> 📱"
+        response = response[:3800] + "\n\n... <i>Подробнее на сайте летиумно.рф</i>"
 
     try:
         await message.answer(
@@ -385,14 +381,13 @@ async def handle_text(message: types.Message, state: FSMContext) -> None:
     _history[user_id] = user_history[-10:]
 
     builder = InlineKeyboardBuilder()
-    builder.button(text="📱 Больше в приложении", url=config.RUSTORE_URL)
-    builder.button(text="🌐 Сайт", url=config.WEBSITE_URL)
-    builder.adjust(2)
+    builder.button(text="🌐 Подробнее на сайте", url=config.WEBSITE_URL)
+    builder.adjust(1)
 
     # Sanitize HTML and truncate
     response = sanitize_html(response)
     if len(response) > 3800:
-        response = response[:3800] + "\n\n... <i>Полный план доступен в приложении</i> 📱"
+        response = response[:3800] + "\n\n... <i>Подробнее на сайте летиумно.рф</i>"
 
     try:
         await message.answer(

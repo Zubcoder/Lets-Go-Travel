@@ -24,7 +24,7 @@ class AppLocalizationsRu extends AppLocalizations {
   String get hotels => 'Отели';
 
   @override
-  String get aiPlanner => 'Travel AI';
+  String get aiPlanner => 'ЛетиУмно';
 
   @override
   String get settings => 'Настройки';
@@ -84,7 +84,7 @@ class AppLocalizationsRu extends AppLocalizations {
   String get bestDeals => 'Лучшие предложения';
 
   @override
-  String get aiPlannerTitle => 'ЛетиУмно AI';
+  String get aiPlannerTitle => 'ЛетиУмно';
 
   @override
   String get aiPlannerHint => 'Опишите ваше идеальное путешествие...';
@@ -153,7 +153,7 @@ class AppLocalizationsRu extends AppLocalizations {
       'Сравниваем цены на отели, хостелы и апартаменты по всему миру';
 
   @override
-  String get onboardingTitle3 => 'ЛетиУмно AI';
+  String get onboardingTitle3 => 'ЛетиУмно';
 
   @override
   String get onboardingDesc3 =>
@@ -225,7 +225,7 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get privacySection1Body =>
-      'Настоящая Политика конфиденциальности разработана в соответствии с Федеральным законом от 27.07.2006 №152-ФЗ «О персональных данных».\n\nОператор персональных данных: ИП Зубков С.С. (далее — Разработчик).\nПриложение: «ЛетиУмно» (далее — Приложение).';
+      'Настоящая Политика конфиденциальности разработана в соответствии с Федеральным законом от 27.07.2006 №152-ФЗ «О персональных данных».\n\nОператор персональных данных: ИП Зубков С.В. (далее — Разработчик).\nПриложение: «ЛетиУмно» (далее — Приложение).';
 
   @override
   String get privacySection2Title => '2. Какие данные мы собираем';
@@ -301,7 +301,7 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get termsSection1Body =>
-      'Настоящее Пользовательское соглашение регулирует использование мобильного приложения «ЛетиУмно», разработанного ИП Зубков С.С.\n\nИспользуя Приложение, вы подтверждаете согласие с условиями настоящего Соглашения.';
+      'Настоящее Пользовательское соглашение регулирует использование мобильного приложения «ЛетиУмно», разработанного ИП Зубков С.В.\n\nИспользуя Приложение, вы подтверждаете согласие с условиями настоящего Соглашения.';
 
   @override
   String get termsSection2Title => '2. Описание сервиса';

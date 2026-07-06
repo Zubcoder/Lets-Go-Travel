@@ -1,5 +1,6 @@
 import httpx
-import google.generativeai as genai
+from google import genai
+from google.genai import types
 from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel
 
@@ -62,11 +63,7 @@ async def plan_trip(request: PlanRequest):
     if not settings.gemini_api_key:
         raise HTTPException(status_code=503, detail="AI service not configured")
 
-    genai.configure(api_key=settings.gemini_api_key)
-    model = genai.GenerativeModel(
-        "gemini-2.5-flash",
-        generation_config={"thinking_config": {"thinking_budget": 0}},
-    )
+    client = genai.Client(api_key=settings.gemini_api_key)
 
     marker = settings.travelpayouts_marker
 
@@ -144,7 +141,13 @@ async def plan_trip(request: PlanRequest):
 Запрос пользователя: {request.query}"""
 
     try:
-        response = await model.generate_content_async(prompt)
+        response = await client.aio.models.generate_content(
+            model="gemini-2.5-flash",
+            contents=prompt,
+            config=types.GenerateContentConfig(
+                thinking_config=types.ThinkingConfig(thinking_budget=0),
+            ),
+        )
         return {"result": response.text}
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))

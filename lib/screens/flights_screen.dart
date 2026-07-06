@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../l10n/app_localizations.dart';
-import '../providers/search_provider.dart';
 import '../utils/constants.dart';
-import '../widgets/flight_card.dart';
 
 class FlightsScreen extends StatefulWidget {
   const FlightsScreen({super.key});
@@ -19,6 +17,25 @@ class _FlightsScreenState extends State<FlightsScreen> {
   DateTime? _returnDate;
   bool _isOneWay = false;
   int _passengers = 1;
+
+  static const _cityIata = <String, String>{
+    'москва': 'MOW', 'санкт-петербург': 'LED', 'питер': 'LED',
+    'сочи': 'AER', 'адлер': 'AER', 'казань': 'KZN',
+    'калининград': 'KGD', 'минводы': 'MRV', 'минеральные воды': 'MRV',
+    'новосибирск': 'OVB', 'екатеринбург': 'SVX', 'красноярск': 'KJA',
+    'владивосток': 'VVO', 'иркутск': 'IKT', 'уфа': 'UFA',
+    'самара': 'KUF', 'пермь': 'PEE', 'махачкала': 'MCX',
+    'анталья': 'AYT', 'анталия': 'AYT', 'стамбул': 'IST',
+    'дубай': 'DXB', 'тбилиси': 'TBS', 'ереван': 'EVN',
+    'баку': 'GYD', 'бангкок': 'BKK', 'пхукет': 'HKT', 'бали': 'DPS',
+    'париж': 'PAR', 'рим': 'ROM', 'барселона': 'BCN',
+    'прага': 'PRG', 'хургада': 'HRG',
+  };
+
+  String _resolveIata(String city) {
+    final clean = city.trim().toLowerCase();
+    return _cityIata[clean] ?? city.trim().toUpperCase();
+  }
 
   @override
   void dispose() {
@@ -49,16 +66,19 @@ class _FlightsScreenState extends State<FlightsScreen> {
     if (_originController.text.isEmpty || _destController.text.isEmpty) return;
     if (_departDate == null) return;
 
-    context.read<SearchProvider>().searchFlights(
-          origin: _originController.text.trim(),
-          destination: _destController.text.trim(),
-          departDate:
-              '${_departDate!.year}-${_departDate!.month.toString().padLeft(2, '0')}-${_departDate!.day.toString().padLeft(2, '0')}',
-          returnDate: _isOneWay || _returnDate == null
-              ? null
-              : '${_returnDate!.year}-${_returnDate!.month.toString().padLeft(2, '0')}-${_returnDate!.day.toString().padLeft(2, '0')}',
-          passengers: _passengers,
-        );
+    final originIata = _resolveIata(_originController.text);
+    final destIata = _resolveIata(_destController.text);
+    final departStr = '${_departDate!.day.toString().padLeft(2, '0')}${_departDate!.month.toString().padLeft(2, '0')}';
+
+    var searchPath = '$originIata$departStr$destIata';
+    if (!_isOneWay && _returnDate != null) {
+      final returnStr = '${_returnDate!.day.toString().padLeft(2, '0')}${_returnDate!.month.toString().padLeft(2, '0')}';
+      searchPath += '$returnStr';
+    }
+    searchPath += '$_passengers';
+
+    final url = 'https://www.aviasales.ru/search/$searchPath?marker=${AppConstants.marker}';
+    launchUrl(Uri.parse(url), mode: LaunchMode.externalApplication);
   }
 
   String _formatDate(DateTime? date) {
@@ -180,72 +200,22 @@ class _FlightsScreenState extends State<FlightsScreen> {
               ),
             ),
             const SizedBox(height: 24),
-            Consumer<SearchProvider>(
-              builder: (context, provider, _) {
-                if (provider.isLoading) {
-                  return const Center(
-                    child: Padding(
-                      padding: EdgeInsets.all(32),
-                      child: CircularProgressIndicator(),
-                    ),
-                  );
-                }
-                if (provider.error != null) {
-                  return Center(
-                    child: Padding(
-                      padding: const EdgeInsets.all(32),
-                      child: Column(
-                        children: [
-                          Icon(Icons.error_outline,
-                              size: 48, color: AppColors.error),
-                          const SizedBox(height: 8),
-                          Text(l10n.error,
-                              style: theme.textTheme.titleMedium),
-                          const SizedBox(height: 8),
-                          ElevatedButton(
-                            onPressed: _search,
-                            child: Text(l10n.retry),
-                          ),
-                        ],
-                      ),
-                    ),
-                  );
-                }
-                if (provider.flights.isEmpty) {
-                  return Padding(
-                    padding: const EdgeInsets.all(32),
-                    child: Center(
-                      child: Column(
-                        children: [
-                          Icon(Icons.flight,
-                              size: 64,
-                              color: AppColors.primary.withValues(alpha: 0.3)),
-                          const SizedBox(height: 16),
-                          Text(
-                            l10n.cheapestFlights,
-                            style: theme.textTheme.titleLarge,
-                          ),
-                          const SizedBox(height: 8),
-                          Text(
-                            l10n.popularDirections,
-                            style: theme.textTheme.bodyMedium,
-                          ),
-                        ],
-                      ),
-                    ),
-                  );
-                }
-                return Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+            Padding(
+              padding: const EdgeInsets.all(32),
+              child: Center(
+                child: Column(
                   children: [
-                    Text(l10n.cheapestFlights,
-                        style: theme.textTheme.titleLarge),
-                    const SizedBox(height: 12),
-                    ...provider.flights
-                        .map((f) => FlightCard(flight: f)),
+                    Icon(Icons.flight,
+                        size: 64,
+                        color: AppColors.primary.withValues(alpha: 0.3)),
+                    const SizedBox(height: 16),
+                    Text('Поиск откроет Aviasales\nс актуальными ценами',
+                        textAlign: TextAlign.center,
+                        style: theme.textTheme.titleMedium?.copyWith(
+                            color: AppColors.textSecondary)),
                   ],
-                );
-              },
+                ),
+              ),
             ),
           ],
         ),

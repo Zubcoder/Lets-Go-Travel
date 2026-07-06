@@ -1,11 +1,29 @@
-import httpx
+from urllib.parse import quote
+
 from fastapi import APIRouter, Query
 
 from ..config import settings
 
 router = APIRouter()
 
-HOTELLOOK_BASE = "https://engine.hotellook.com/api/v2"
+# City name to English name for Hotellook URLs
+CITY_EN: dict[str, str] = {
+    "москва": "Moscow", "сочи": "Sochi", "санкт-петербург": "Saint-Petersburg",
+    "казань": "Kazan", "калининград": "Kaliningrad", "анталья": "Antalya",
+    "анталия": "Antalya", "стамбул": "Istanbul", "дубай": "Dubai",
+    "тбилиси": "Tbilisi", "париж": "Paris", "рим": "Rome",
+    "барселона": "Barcelona", "прага": "Prague", "бали": "Bali",
+    "пхукет": "Phuket", "хургада": "Hurghada", "мальдивы": "Maldives",
+    "ереван": "Yerevan", "баку": "Baku", "бангкок": "Bangkok",
+    "минеральные воды": "Mineralnye-Vody", "минводы": "Mineralnye-Vody",
+    "екатеринбург": "Yekaterinburg", "новосибирск": "Novosibirsk",
+    "красноярск": "Krasnoyarsk", "владивосток": "Vladivostok",
+}
+
+
+def _city_en(city: str) -> str:
+    """Get English city name for URL."""
+    return CITY_EN.get(city.strip().lower(), city.strip())
 
 
 @router.get("/search")
@@ -15,61 +33,23 @@ async def search_hotels(
     check_out: str = Query(..., description="Check-out date YYYY-MM-DD"),
     guests: int = Query(1, ge=1, le=10),
 ):
-    # First, look up the location ID
-    async with httpx.AsyncClient(timeout=30) as client:
-        lookup_resp = await client.get(
-            f"{HOTELLOOK_BASE}/lookup.json",
-            params={
-                "query": location,
-                "lang": "ru",
-                "lookFor": "city",
-                "limit": 1,
-                "token": settings.travelpayouts_token,
-            },
-        )
-        lookup_resp.raise_for_status()
-        lookup_data = lookup_resp.json()
+    marker = settings.travelpayouts_marker
+    city_en = _city_en(location)
+    city_slug = city_en.lower().replace(" ", "-")
 
-    cities = lookup_data.get("results", {}).get("locations", [])
-    if not cities:
-        return {"results": [], "count": 0}
+    # Build the search URL that will redirect user to Hotellook
+    search_url = (
+        f"https://search.hotellook.com/hotels"
+        f"?destination={quote(city_en)}"
+        f"&checkIn={check_in}&checkOut={check_out}"
+        f"&adults={guests}&marker={marker}"
+    )
 
-    city_id = cities[0].get("id")
-    city_name = cities[0].get("name", location)
-
-    # Search hotels in the city
-    async with httpx.AsyncClient(timeout=30) as client:
-        resp = await client.get(
-            f"{HOTELLOOK_BASE}/cache.json",
-            params={
-                "location": city_id,
-                "checkIn": check_in,
-                "checkOut": check_out,
-                "adults": guests,
-                "currency": "rub",
-                "limit": 20,
-                "token": settings.travelpayouts_token,
-            },
-        )
-        resp.raise_for_status()
-        data = resp.json()
-
-    results = []
-    for h in data if isinstance(data, list) else []:
-        hotel_id = h.get("hotelId", "")
-        results.append(
-            {
-                "name": h.get("hotelName", ""),
-                "location": city_name,
-                "price_from": h.get("priceFrom", 0),
-                "currency": "RUB",
-                "rating": h.get("rating", 0),
-                "stars": h.get("stars", 0),
-                "photo_url": f"https://photo.hotellook.com/image_v2/crop/h{hotel_id}_1/320/240.auto"
-                if hotel_id
-                else "",
-                "link": f"https://search.hotellook.com/hotels?destination={city_id}&checkIn={check_in}&checkOut={check_out}&adults={guests}",
-            }
-        )
-
-    return {"results": results, "count": len(results)}
+    # Return a single result that points to the search URL
+    # The app will open this in the browser for real-time prices
+    return {
+        "results": [],
+        "count": 0,
+        "search_url": search_url,
+        "message": f"Перейдите по ссылке для поиска отелей в городе {location}",
+    }

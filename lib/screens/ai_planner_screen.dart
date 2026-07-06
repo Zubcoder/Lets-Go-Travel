@@ -105,9 +105,9 @@ class _AiPlannerScreenState extends State<AiPlannerScreen> {
             const Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('ЛетиУмно AI',
+                Text('ЛетиУмно',
                     style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
-                Text('Ваш travel-консьерж',
+                Text('Ваш умный помощник',
                     style: TextStyle(fontSize: 11, color: AppColors.accent)),
               ],
             ),
