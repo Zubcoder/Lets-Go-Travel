@@ -83,7 +83,30 @@
     }
 
     /* Hero */
-    .hero { text-align: center; padding: 60px 0 50px; }
+    .hero {
+      text-align: center; padding: 80px 0 60px; position: relative; overflow: hidden;
+    }
+    .hero::before {
+      content: ''; position: absolute; inset: 0;
+      background: url('watercolor_bg.jpg') center/cover no-repeat;
+      opacity: 0.25; filter: blur(2px); z-index: -1;
+    }
+    .hero::after {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(ellipse at center, transparent 20%, var(--bg-primary) 80%);
+      z-index: -1;
+    }
+    .hero-logo {
+      width: 140px; height: 140px; margin: 0 auto 32px;
+      border-radius: 32px; overflow: hidden;
+      box-shadow: 0 16px 64px var(--glow-orange);
+      animation: pulse-glow 3s ease-in-out infinite;
+    }
+    .hero-logo img { width: 100%; height: 100%; object-fit: cover; }
+    @keyframes pulse-glow {
+      0%, 100% { box-shadow: 0 16px 64px var(--glow-orange); }
+      50% { box-shadow: 0 16px 80px rgba(255,140,66,0.5); }
+    }
     .hero h1 {
       font-size: 52px; font-weight: 800; letter-spacing: -2px;
       background: linear-gradient(135deg, #fff 0%, var(--accent-orange-light) 40%, var(--accent-teal) 100%);
@@ -283,7 +306,8 @@
     @media (max-width: 768px) {
       .hero h1 { font-size: 32px; }
       .hero-tagline { font-size: 16px; }
-      .hero { padding: 40px 0 30px; }
+      .hero { padding: 48px 0 40px; }
+      .hero-logo { width: 100px; height: 100px; border-radius: 24px; }
       .stats-bar { flex-direction: column; gap: 20px; }
       .services-grid { grid-template-columns: 1fr; }
       .destinations-grid { grid-template-columns: 1fr; }
@@ -326,6 +350,7 @@
 
     <!-- Hero -->
     <section class="hero">
+      <div class="hero-logo"><img src="logo.png" alt="ЛетиУмно"></div>
       <h1>Путешествуйте умнее</h1>
       <p class="hero-tagline">
         <strong>ЛетиУмно</strong> — ваш AI-помощник для путешествий. Находим дешёвые авиабилеты,
@@ -397,12 +422,12 @@
           <span class="service-tag">Aviasales</span>
         </a>
 
-        <a href="https://search.hotellook.com/?marker=746125" class="service-card" target="_blank" rel="noopener"
+        <a href="https://ostrovok.ru/?marker=746125" class="service-card" target="_blank" rel="noopener"
            style="--card-gradient: linear-gradient(135deg, #00CEC9, #55EAE5);">
           <div class="service-icon">&#127960;</div>
           <div class="service-title">Отели</div>
-          <div class="service-desc">Сравнение цен на 2M+ отелей, хостелов и апартаментов по всему миру.</div>
-          <span class="service-tag">Hotellook</span>
+          <div class="service-desc">Островок — поиск и бронирование отелей, хостелов и апартаментов. Работает в России.</div>
+          <span class="service-tag">Островок</span>
         </a>
 
         <a href="https://level.travel/?marker=746125" class="service-card" target="_blank" rel="noopener"
@@ -423,9 +448,9 @@
 
         <a href="https://cherehapa.ru/?marker=746125" class="service-card" target="_blank" rel="noopener"
            style="--card-gradient: linear-gradient(135deg, #E91E63, #F48FB1);">
-          <div class="service-icon">&#128737;</div>
-          <div class="service-title">Страховка</div>
-          <div class="service-desc">Туристическая страховка от 30+ компаний. Покрытие COVID, спорт, отмена рейса.</div>
+          <div class="service-icon">&#9889;</div>
+          <div class="service-title">Страховка онлайн</div>
+          <div class="service-desc">Оформление страховки онлайн за 5 минут. Покрытие COVID, спорт, отмена рейса.</div>
           <span class="service-tag">Cherehapa</span>
         </a>
 
@@ -435,6 +460,38 @@
           <div class="service-title">Трансферы</div>
           <div class="service-desc">Трансфер из аэропорта в отель. Фиксированная цена, водитель с табличкой.</div>
           <span class="service-tag">Kiwitaxi</span>
+        </a>
+
+        <a href="https://www.tutu.ru/?marker=746125" class="service-card" target="_blank" rel="noopener"
+           style="--card-gradient: linear-gradient(135deg, #2196F3, #64B5F6);">
+          <div class="service-icon">&#128646;</div>
+          <div class="service-title">ЖД и автобусы</div>
+          <div class="service-desc">Билеты на поезда и автобусы по России и СНГ. Удобный поиск, электронные билеты.</div>
+          <span class="service-tag">Tutu.ru</span>
+        </a>
+
+        <a href="https://www.sravni.ru/strahovka-dlya-vyezda-za-granicu/" class="service-card" target="_blank" rel="noopener"
+           style="--card-gradient: linear-gradient(135deg, #009688, #4DB6AC);">
+          <div class="service-icon">&#128737;</div>
+          <div class="service-title">Страхование</div>
+          <div class="service-desc">Сравнение туристических страховок от 30+ компаний. Выезд за границу, спорт, отмена рейса.</div>
+          <span class="service-tag">Сравни.ру</span>
+        </a>
+
+        <a href="https://onlinetours.ru/?marker=746125" class="service-card" target="_blank" rel="noopener"
+           style="--card-gradient: linear-gradient(135deg, #FF5722, #FF8A65);">
+          <div class="service-icon">&#127965;</div>
+          <div class="service-title">Туры онлайн</div>
+          <div class="service-desc">Пакетные туры от всех туроператоров. Перелёт + отель + трансфер в одном пакете.</div>
+          <span class="service-tag">OnlineTours</span>
+        </a>
+
+        <a href="https://visatohome.ru/" class="service-card" target="_blank" rel="noopener"
+           style="--card-gradient: linear-gradient(135deg, #3F51B5, #7986CB);">
+          <div class="service-icon">&#128196;</div>
+          <div class="service-title">Визы</div>
+          <div class="service-desc">Оформление виз без очередей. Подготовка документов и подача в визовый центр за вас.</div>
+          <span class="service-tag">VisaToHome</span>
         </a>
       </div>
     </section>
@@ -563,12 +620,15 @@
       <h2 class="section-title">Партнёры и <span>технологии</span></h2>
       <div class="partners-grid">
         <div class="partner-item">Aviasales</div>
-        <div class="partner-item">Hotellook</div>
+        <div class="partner-item">Островок</div>
         <div class="partner-item">Level.Travel</div>
         <div class="partner-item">Tripster</div>
         <div class="partner-item">Cherehapa</div>
         <div class="partner-item">Kiwitaxi</div>
-        <div class="partner-item">Sputnik8</div>
+        <div class="partner-item">Tutu.ru</div>
+        <div class="partner-item">Сравни.ру</div>
+        <div class="partner-item">OnlineTours</div>
+        <div class="partner-item">VisaToHome</div>
         <div class="partner-item">Gemini AI</div>
       </div>
     </div>
