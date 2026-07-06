@@ -19,12 +19,13 @@ class Config:
         "https://xn--e1afkclhg3b5e.xn--p1ai/",
     )
     AVIASALES_BASE: str = "https://www.aviasales.ru"
-    HOTELLOOK_BASE: str = "https://www.hotellook.ru"
+    OSTROVOK_BASE: str = "https://ostrovok.ru"
     TRIPSTER_BASE: str = "https://experience.tripster.ru"
-    DISCOVERCARS_BASE: str = "https://www.discovercars.com"
     CHEREHAPA_BASE: str = "https://cherehapa.ru"
-    YESIM_BASE: str = "https://www.yesim.app"
     KIWITAXI_BASE: str = "https://kiwitaxi.com"
+    LEVEL_TRAVEL_BASE: str = "https://level.travel"
+    TUTU_BASE: str = "https://www.tutu.ru"
+    SRAVNI_BASE: str = "https://www.sravni.ru/strahovka-dlya-vyezda-za-granicu"
 
 
 config = Config()

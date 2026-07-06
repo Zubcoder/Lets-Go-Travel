@@ -111,14 +111,16 @@ async def cmd_partners(message: types.Message) -> None:
     marker = config.TRAVELPAYOUTS_MARKER
     text = (
         "🌍 <b>Проверенные сервисы для путешествий:</b>\n\n"
-        f"✈️ <a href='{config.AVIASALES_BASE}?marker={marker}'>Авиабилеты</a> — сравнение цен 728 авиакомпаний\n"
-        f"🏨 <a href='{config.HOTELLOOK_BASE}?marker={marker}'>Отели</a> — лучшие цены по всему миру\n"
+        f"✈️ <a href='{config.AVIASALES_BASE}?marker={marker}'>Авиабилеты</a> — сравнение цен 500+ авиакомпаний\n"
+        f"🏨 <a href='{config.OSTROVOK_BASE}/?marker={marker}'>Отели (Островок)</a> — бронирование из России\n"
+        f"🏖 <a href='{config.LEVEL_TRAVEL_BASE}/?marker={marker}'>Пакетные туры</a> — перелёт+отель+трансфер\n"
         f"🎭 <a href='{config.TRIPSTER_BASE}?marker={marker}'>Экскурсии</a> — авторские туры с местными гидами\n"
-        f"🚗 <a href='{config.DISCOVERCARS_BASE}?marker={marker}'>Аренда авто</a> — от 900₽/день\n"
         f"🛡 <a href='{config.CHEREHAPA_BASE}?marker={marker}'>Страховка</a> — оформление за 2 минуты\n"
-        f"📱 <a href='{config.YESIM_BASE}'>eSIM</a> — интернет в 150+ странах\n"
-        f"🚕 <a href='{config.KIWITAXI_BASE}?marker={marker}'>Трансфер</a> — встреча в аэропорту\n\n"
-        "Все сервисы проверены и рекомендованы нашим AI ❤️"
+        f"🚕 <a href='{config.KIWITAXI_BASE}?marker={marker}'>Трансфер</a> — встреча в аэропорту\n"
+        f"🚆 <a href='{config.TUTU_BASE}/?marker={marker}'>ЖД и автобусы</a> — билеты по России и СНГ\n"
+        f"🛡 <a href='{config.SRAVNI_BASE}'>Сравнение страховок</a> — 30+ компаний\n\n"
+        "Все сервисы проверены и рекомендованы ❤️\n"
+        f"🌐 <a href='{config.WEBSITE_URL}'>Больше на сайте летиумно.рф</a>"
     )
     await message.answer(text, parse_mode="HTML", disable_web_page_preview=True)
 

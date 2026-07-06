@@ -63,8 +63,8 @@ SYSTEM_PROMPT = """\
   Если дата неизвестна — убери параметр depart_date
   Если кол-во пассажиров неизвестно — ставь adults=1&children=0
   IATA коды: Москва=MOW, Сочи=AER, Анталья=AYT, Стамбул=IST, Дубай=DXB, Тбилиси=TBS, Калининград=KGD, Минводы=MRV, Пхукет=HKT, Бали=DPS
-- Отели: <a href="https://search.hotellook.com/hotels?destination=[ГОРОД_АНГЛ]&checkIn=[ГГГГ-ММ-ДД]&checkOut=[ГГГГ-ММ-ДД]&adults=[N]&marker={marker}">Подобрать отель в [Город]</a>
-  Если даты неизвестны: <a href="https://hotellook.ru/hotels/[город_англ_маленькими]/?marker={marker}">Подобрать отель</a>
+- Отели: <a href="https://ostrovok.ru/hotel/search/?destination=[ГОРОД_АНГЛ]&checkIn=[ГГГГ-ММ-ДД]&checkOut=[ГГГГ-ММ-ДД]&adults=[N]&marker={marker}">Подобрать отель в [Город]</a>
+  Если даты неизвестны: <a href="https://ostrovok.ru/?marker={marker}">Подобрать отель на Островок</a>
 - Экскурсии: <a href="https://experience.tripster.ru/experience/[город_англ_маленькими]/?marker={marker}">Экскурсии в [Город]</a>
 - Страховка: <a href="https://cherehapa.ru/?marker={marker}">Оформить страховку</a>
 - Трансфер: <a href="https://kiwitaxi.com/[страна_англ]/[город_англ]?marker={marker}">Заказать трансфер</a>
@@ -184,11 +184,11 @@ def build_partner_links(destination: str) -> str:
     marker = config.TRAVELPAYOUTS_MARKER
     dest_name = city_name(destination)
     lines = [
-        f"🏨 <a href='{config.HOTELLOOK_BASE}/{destination}?marker={marker}'>Отели в {dest_name}</a>",
+        f"🏨 <a href='{config.OSTROVOK_BASE}/?marker={marker}'>Отели в {dest_name}</a>",
         f"🎭 <a href='{config.TRIPSTER_BASE}?marker={marker}'>Экскурсии</a>",
-        f"🚗 <a href='{config.DISCOVERCARS_BASE}?marker={marker}'>Аренда авто (до 54%!)</a>",
-        f"🛡 <a href='{config.CHEREHAPA_BASE}?marker={marker}'>Страховка (до 30%)</a>",
-        f"📱 <a href='{config.YESIM_BASE}'>eSIM для связи</a>",
+        f"🛡 <a href='{config.CHEREHAPA_BASE}?marker={marker}'>Страховка</a>",
         f"🚕 <a href='{config.KIWITAXI_BASE}?marker={marker}'>Трансфер</a>",
+        f"🏖 <a href='{config.LEVEL_TRAVEL_BASE}/?marker={marker}'>Пакетные туры</a>",
+        f"🚆 <a href='{config.TUTU_BASE}/?marker={marker}'>ЖД билеты</a>",
     ]
     return "\n".join(lines)
